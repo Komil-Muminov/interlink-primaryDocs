@@ -1,0 +1,11 @@
+.title-section {
+  background-color: var(--primary-color);
+  width: 100%;
+  border-radius: 30px;
+  padding: 15px 30px;
+}
+
+.title-section p {
+  color: #fff;
+  font-weight: 500;
+}
