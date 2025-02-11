@@ -13,6 +13,8 @@ import {
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Header.css";
+import SubList from "../Links/SubList";
+import { subModulsLink } from "../../API/data/SubModuls";
 
 // Основной компонент Header
 const Header: React.FC = () => {
@@ -96,7 +98,7 @@ const Header: React.FC = () => {
 								<Tooltip title="Открыть настройки" className="header__tooltip">
 									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 										<Avatar alt="User Avatar" src={defName} />
-										<p className="header__right-uname">{info.name}</p>
+										<p className="header__right-uname">{defName}</p>
 									</IconButton>
 								</Tooltip>
 
@@ -152,7 +154,6 @@ const Header: React.FC = () => {
 
 									{/* Пункт "Выход" */}
 									<MenuItem
-										onClick={handleLogout}
 										sx={{
 											p: 0,
 											minWidth: "200px",
@@ -174,6 +175,8 @@ const Header: React.FC = () => {
 							</Box>
 						</div>
 					</div>
+					{/* Модули */}
+					<SubList item={subModulsLink} />
 				</div>
 			</header>
 		</>
