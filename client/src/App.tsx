@@ -54,7 +54,7 @@ function App() {
 								headAccountantName="km"
 							/> */}
 						</Suspense>
-					</div> 
+					</div>
 				</div>
 			</main>
 		</>

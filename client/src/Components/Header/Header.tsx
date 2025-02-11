@@ -13,6 +13,8 @@ import {
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Header.css";
+import SubList from "../Links/SubList";
+import { subModulsLink } from "../../API/data/SubModuls";
 
 // Основной компонент Header
 const Header: React.FC = () => {
@@ -173,6 +175,8 @@ const Header: React.FC = () => {
 							</Box>
 						</div>
 					</div>
+					{/* Модули */}
+					<SubList item={subModulsLink} />
 				</div>
 			</header>
 		</>
