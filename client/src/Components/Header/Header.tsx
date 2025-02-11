@@ -96,7 +96,7 @@ const Header: React.FC = () => {
 								<Tooltip title="Открыть настройки" className="header__tooltip">
 									<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 										<Avatar alt="User Avatar" src={defName} />
-										<p className="header__right-uname">{info.name}</p>
+										<p className="header__right-uname">{defName}</p>
 									</IconButton>
 								</Tooltip>
 
@@ -152,7 +152,6 @@ const Header: React.FC = () => {
 
 									{/* Пункт "Выход" */}
 									<MenuItem
-										onClick={handleLogout}
 										sx={{
 											p: 0,
 											minWidth: "200px",
