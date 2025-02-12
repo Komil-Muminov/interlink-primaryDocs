@@ -9,9 +9,9 @@ const LazyAuthrozation = lazy(
 );
 const LazyLogMe = lazy(() => import("./routes/Auth/Logme/Logme"));
 const LazyRegMe = lazy(() => import("./routes/Auth/Regme/Regme"));
-const LazyCrm = lazy(() => import("./routes/CRM/Crm"));
-const LazyCreateCRM = lazy(() => import("./routes/CRM/Create/CreateCRM"));
-const LazyShowCRM = lazy(() => import("./routes/CRM/Show/ShowCRM"));
+const LazyCrm = lazy(() => import("./routes/PrimaryDocs/PrimaryDocs"));
+const LazyCreateCRM = lazy(() => import("./routes/PrimaryDocs/Create/Constructor"));
+const LazyShowCRM = lazy(() => import("./routes/PrimaryDocs/Show/ShowDocs"));
 // const LazyOrgcard = lazy(() => import("./routes/Orgcard/Orgcard"));
 function App() {
 	const location = useLocation();

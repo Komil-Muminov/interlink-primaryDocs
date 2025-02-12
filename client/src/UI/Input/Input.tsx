@@ -8,10 +8,12 @@ interface TProps {
 	borderRadiusStyle: string;
 	heightStyle: string;
 	widthStyle: string;
+	classname: string | undefined;
 }
 
 const Input = ({
 	register,
+	classname,
 	idValue,
 	labelValue,
 	borderRadiusStyle,
@@ -23,6 +25,7 @@ const Input = ({
 			{...register(idValue)}
 			id={idValue}
 			label={labelValue}
+			className={classname}
 			sx={{
 				"& .MuiOutlinedInput-root": {
 					borderRadius: borderRadiusStyle,
