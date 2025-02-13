@@ -148,7 +148,6 @@ const CreatePrimaryDoc = () => {
 		if (handleCheckInnMutate.data) {
 			const validInn = handleCheckInnMutate.data;
 			setIsValidInn(true);
-			console.log(`validInn:${validInn.tax}`);
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 	console.log(isValidInn);
