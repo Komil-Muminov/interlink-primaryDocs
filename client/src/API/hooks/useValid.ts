@@ -1,9 +1,10 @@
+import { OrganizationScheme } from "../services/organizations/OrganizationScheme";
 export interface ValidInnProps {
-	tax: string | undefined;
+	org: OrganizationScheme;
 }
 
 export const useValid = () => {
-	const validInn = async (inn: string): Promise<ValidInnProps> => {
+	const validInn = async (inn: string): Promise<ValidInnProps[]> => {
 		return fetch(`http://localhost:3000/organizations/checkinn`, {
 			method: "POST",
 			headers: {
