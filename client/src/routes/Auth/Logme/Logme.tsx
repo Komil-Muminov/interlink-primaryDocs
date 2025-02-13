@@ -15,7 +15,7 @@ const Logme: React.FC = () => {
 			queryClient.invalidateQueries({ queryKey: ["organizations"] }),
 	});
 
-	const onsubmit = (data: { username: string; password: string }) => {
+	const onSubmit = (data: { username: string; password: string }) => {
 		logMeMutation.mutate(data);
 	};
 
@@ -39,7 +39,7 @@ const Logme: React.FC = () => {
 				classname="auth-form logme__form"
 				submitText="Войти"
 				submitClassname="btn-mui regme__sbt"
-				onSubmit={onsubmit}
+				onSubmit={onSubmit}
 			></Form>
 		</>
 	);
