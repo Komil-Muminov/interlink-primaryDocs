@@ -1,5 +1,9 @@
+export interface ValidInnProps {
+	tax: string | undefined;
+}
+
 export const useValid = () => {
-	const validInn = async (inn: string) => {
+	const validInn = async (inn: string): Promise<ValidInnProps> => {
 		return fetch(`http://localhost:3000/organizations/checkinn`, {
 			method: "POST",
 			headers: {
