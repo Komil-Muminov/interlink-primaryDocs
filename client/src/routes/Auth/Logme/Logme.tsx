@@ -11,7 +11,7 @@ const Logme: React.FC = () => {
 	const logMeMutation = useMutation({
 		mutationFn: (data: { username: string; password: string }) => logMe(data),
 		onSuccess: () =>
-			navigate("/crm") &&
+			navigate("/primary-docs") &&
 			queryClient.invalidateQueries({ queryKey: ["organizations"] }),
 	});
 
