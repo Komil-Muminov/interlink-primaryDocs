@@ -124,27 +124,35 @@ const CreatePrimaryDoc = () => {
 
 	// Watch INN
 	const { validInn } = useValid();
-	const [debounceInn, setDebounceInn] = useState<string>("");
-	const isValidInn = watch("tax");
-	useEffect(() => {
-		const setTimeOut = setTimeout(() => setDebounceInn(isValidInn), 5000);
-		return () => clearTimeout(setTimeOut);
-	});
+	const Inn = getValues("tax");
+	const [isValidInn, setIsValidInn] = useState<boolean>(false);
 
 	const handleCheckInnMutate = useMutation(
 		{
-			mutationFn: () => validInn(debounceInn),
+			mutationFn: () => validInn(Inn),
 			onSuccess: () =>
-				queryClient.invalidateQueries({ queryKey: ["organizations"] }),
+				queryClient.invalidateQueries({ queryKey: ["organization"] }),
+			onError: (error) => {
+				console.log(error.message);
+				setIsValidInn(false);
+			},
 		},
 		queryClient,
 	);
 
 	const handleCheckInnSubmit = (data: string) => {
-		handleCheckInnMutate.mutateAsync(data);
+		handleCheckInnMutate.mutate(data);
 	};
+
+	useEffect(() => {
+		if (handleCheckInnMutate.data) {
+			const validInn = handleCheckInnMutate.data;
+			setIsValidInn(true);
+			console.log(`validInn:${validInn.tax}`);
+		}
+	}, [Inn, handleCheckInnMutate.data]);
+	console.log(isValidInn);
 	return (
-		// Логику рендера доработать ) условный рендер
 		<main className="create-crm">
 			<TitleSection title="Новый договор" />
 			<PanelControl
@@ -173,7 +181,7 @@ const CreatePrimaryDoc = () => {
 					</Button>
 
 					<SelectUI
-						disable={!debounceInn}
+						disable={!isValidInn}
 						control={control}
 						nameValue="unitAccountingTer"
 						labelValue="Шаблон договора"

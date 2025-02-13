@@ -2,14 +2,21 @@ import { Request, Response, RequestHandler } from "express";
 import { readFile } from "../../modules/fs/readFile";
 import { ORGANIZATIONS_FILE_PATH } from "../../services/filePaths";
 
-export const CheckInn: RequestHandler = (req: Request, res: Response) => {
-	const { inn } = req.body;
-	const getInn = readFile(ORGANIZATIONS_FILE_PATH).find(
-		(item) => item.tax === inn,
-	);
-	if (getInn) {
-		return res.status(200).send("Инн организации валиден");
-	} else {
-		return res.status(400).send(`Инн организации не валиден`);
+export const CheckInn: RequestHandler = async (req: Request, res: Response) => {
+	try {
+		const { inn } = req.body;
+
+		const organizations = readFile(ORGANIZATIONS_FILE_PATH);
+
+		const getInn = organizations.find((item) => item.tax === inn);
+
+		if (getInn) {
+			return res.status(200).json({ tax: getInn.tax });
+		} else {
+			return res.status(400).json({ message: "Инн организации не валиден" });
+		}
+	} catch (error) {
+		console.error("Ошибка при проверке ИНН:", error);
+		return res.status(500).json({ message: "Ошибка сервера" });
 	}
 };
