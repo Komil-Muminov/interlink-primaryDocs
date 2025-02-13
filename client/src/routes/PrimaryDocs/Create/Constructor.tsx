@@ -1,12 +1,9 @@
-import React, { HtmlHTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TitleSection from "../../../UI/Title of Section/TitleSection";
 import PanelControl from "../../../UI/Panel Control/PanelControl";
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 import SelectUI from "../../../UI/Select/SelectUI";
-import FindInPageIcon from "@mui/icons-material/FindInPage";
-import EditIcon from "@mui/icons-material/Edit";
-import AddIcon from "@mui/icons-material/Add";
 
 // ---------------------------------------------------------------------
 import InputFile from "../../../components/File Service/File Service Input File/InputFile";
@@ -14,14 +11,18 @@ import FileList from "../../../components/File Service/File Service File List/Fi
 import { useForm } from "react-hook-form";
 import { OrganizationScheme } from "../../../API/services/organizations/OrganizationScheme";
 import Input from "../../../UI/Input/Input";
-import DatePickerUI from "../../../UI/Date Picker/DatePickerUI";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../API/hooks/queryClient";
 import { createOrganization } from "../../../API/services/organizations/createOrganization";
 import { generateUniqueId } from "../../../API/hooks/generateUniqueId";
 import { useNavigate } from "react-router";
+import { useValid } from "../../../API/hooks/useValid";
 import "./Constructor.css";
 
+// import FindInPageIcon from "@mui/icons-material/FindInPage";
+// import EditIcon from "@mui/icons-material/Edit";
+// import AddIcon from "@mui/icons-material/Add";
+// import DatePickerUI from "../../../UI/Date Picker/DatePickerUI";
 // import Box from "@mui/material/Box";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -112,9 +113,6 @@ const CreatePrimaryDoc = () => {
 		navigate(`/crm/show/${orgId}`);
 	};
 
-	console.log(formValues);
-	console.log(getValues("files"));
-
 	// Функция для удаления файла по индексу
 	const handleDelete = (fileIndex: number) => {
 		const currentFiles = getValues("files") || [];
@@ -124,6 +122,27 @@ const CreatePrimaryDoc = () => {
 		setValue("files", updatedFiles);
 	};
 
+	// Watch INN
+	const { validInn } = useValid();
+	const [debounceInn, setDebounceInn] = useState<string>("");
+	const isValidInn = watch("tax");
+	useEffect(() => {
+		const setTimeOut = setTimeout(() => setDebounceInn(isValidInn), 5000);
+		return () => clearTimeout(setTimeOut);
+	});
+
+	const handleCheckInnMutate = useMutation(
+		{
+			mutationFn: () => validInn(debounceInn),
+			onSuccess: () =>
+				queryClient.invalidateQueries({ queryKey: ["organizations"] }),
+		},
+		queryClient,
+	);
+
+	const handleCheckInnSubmit = (data: string) => {
+		handleCheckInnMutate.mutateAsync(data);
+	};
 	return (
 		// Логику рендера доработать ) условный рендер
 		<main className="create-crm">
@@ -135,7 +154,10 @@ const CreatePrimaryDoc = () => {
 			/>
 			<TitleSection title="Данные организации" />
 			<section>
-				<form action="" className="form crtPrimaryDocs__form">
+				<form
+					onSubmit={handleSubmit(handleCheckInnSubmit)}
+					className="form crtPrimaryDocs__form"
+				>
 					<Input
 						register={register}
 						classname="crtPrimaryDocs__form--isDataSuccess"
@@ -145,12 +167,13 @@ const CreatePrimaryDoc = () => {
 						heightStyle="90%"
 						widthStyle="85%"
 					/>
-					<Button type="button" className="btn-mui constructon__btn--active">
+					<Button type="submit" className="btn-mui constructon__btn--active">
 						{/* <FindInPageIcon sx={{ alignSelf: "center" }} />{" "} */}
 						Получить данные
 					</Button>
 
 					<SelectUI
+						disable={!debounceInn}
 						control={control}
 						nameValue="unitAccountingTer"
 						labelValue="Шаблон договора"
@@ -162,174 +185,9 @@ const CreatePrimaryDoc = () => {
 							{ id: 3, title: "Договор № 3" },
 						]}
 					/>
-
-					{/* <Input
-						register={register}
-						idValue="identificator"
-						labelValue="Идентификатор *"
-						borderRadiusStyle="30px"
-						heightStyle="90%"
-						widthStyle="48%"
-					/> */}
-					{/* <Input
-						register={register}
-						idValue="name"
-						labelValue="Название *"
-						borderRadiusStyle="30px"
-						heightStyle="90%"
-						widthStyle="48%"
-					/>
-					<Input
-						register={register}
-						idValue="docNo"
-						labelValue="Номер договора"
-						borderRadiusStyle="30px"
-						heightStyle="90%"
-						widthStyle="48%"
-					/>
-					<DatePickerUI
-						control={control}
-						nameValue="dateDoc"
-						labelValue="Дата договора"
-						borderRadiusStyle="30px"
-						heightStyle="90%"
-						widthStyle="48%"
-					/>
-					<Input
-						register={register}
-						idValue="address"
-						labelValue="Адрес"
-						borderRadiusStyle="30px"
-						heightStyle="90%"
-						widthStyle="48%"
-					/>
-					<SelectUI
-						control={control}
-						nameValue="terCode"
-						labelValue="Код территории"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{ id: 1, title: "Бадахшан" },
-							{ id: 2, title: "Хатлон" },
-							{ id: 3, title: "Душанбе" },
-						]}
-					/>
-					
-					<SelectUI
-						control={control}
-						nameValue="grbsResonsible"
-						labelValue="ГРБС (Ответственный)"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{ id: 1, title: "103-Сарраёсати хазинадории марказии ҶТ" },
-							{ id: 2, title: "104-шаҳри Душанбе" },
-							{ id: 3, title: "105-ноҳияи Синои" },
-						]}
-					/>
-					<SelectUI
-						control={control}
-						nameValue="grbs"
-						labelValue="ГРБС"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{
-								id: 1,
-								title: "108-108-Вазорати корҳои дохилии Ҷумҳурии Тоҷикистон",
-							},
-							{ id: 2, title: "109-109-Вазорати мудофиаи Ҷумҳурии Тоҷикистон" },
-							{
-								id: 3,
-								title:
-									"101-101-Дастгоҳи иҷроияи Президенти Ҷумҳурии Тоҷикистон",
-							},
-						]}
-					/>
-					<SelectUI
-						control={control}
-						nameValue="grbs"
-						labelValue="ПБС"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{
-								id: 1,
-								title: "10801013-10801013-Шуъбаи корҳои дохилии ноҳияи Лахш",
-							},
-							{
-								id: 2,
-								title:
-									"10703001-10703001-Дастгоҳи марказии Бозрасии назорати давлатии тухмии Вазорати кишоварзии Ҷумҳурии Тоҷикистон",
-							},
-							{
-								id: 3,
-								title:
-									"10703002-10703002-Бозрасии назорати давлатии тухмӣ дар вилояти Хатлон",
-							},
-						]}
-					/>
-					<SelectUI
-						control={control}
-						nameValue="bz"
-						labelValue="Бюджетные заявки *"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{
-								id: 1,
-								title: "63581",
-							},
-							{ id: 2, title: "63582" },
-							{
-								id: 3,
-								title: "63583",
-							},
-						]}
-					/>
-					<SelectUI
-						control={control}
-						nameValue="details"
-						labelValue="Реквизиты"
-						borderRadiusStyle="30px"
-						widthStyle="44%"
-						data={[
-							{
-								id: 1,
-								title: "123",
-							},
-							{ id: 2, title: "1234" },
-							{
-								id: 3,
-								title: "12345",
-							},
-						]}
-					/>
-					<IconButton>
-						<AddIcon />
-					</IconButton>
-					<SelectUI
-						control={control}
-						nameValue="orgType"
-						labelValue="Тип организации"
-						borderRadiusStyle="30px"
-						widthStyle="48%"
-						data={[
-							{
-								id: 1,
-								title: "Бюджетная организация",
-							},
-							{ id: 2, title: "Коммерческая организация" },
-							{
-								id: 3,
-								title: "Министерство финансов",
-							},
-						]}
-					/> */}
 				</form>
 			</section>
-			<TitleSection title="Документы" />
+			<TitleSection title="Данные для договора" />
 			<section>
 				<div className="wrapper-documents">
 					<InputFile setValue={setValue} getValues={getValues} />
