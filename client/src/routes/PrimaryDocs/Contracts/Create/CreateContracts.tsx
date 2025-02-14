@@ -13,8 +13,9 @@ import { createOrganization } from "../../../../API/services/organizations/creat
 import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
-import CardOrganization from "../../../../UI/Card of Organization/CardOrganization";
 import "./CreateContracts.css";
+import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
+import UserCard from "../../../../UI/Card/User Card/UserCard";
 
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
 // import EditIcon from "@mui/icons-material/Edit";
@@ -30,7 +31,7 @@ import "./CreateContracts.css";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const CreateContracts = () => {
-	const { register, watch, control, handleSubmit, setValue, getValues } =
+	const { register, watch, handleSubmit, setValue, getValues } =
 		useForm<OrganizationScheme>({
 			defaultValues: {
 				tax: "",
@@ -139,10 +140,9 @@ const CreateContracts = () => {
 
 	const handleCheckInnSubmit = (data: string) => {
 		handleCheckInnMutate.mutate(data);
-		console.log(data);
 	};
 
-	const [getOrg, setGetOrg] = useState<OrganizationScheme[]>([]);
+	const [getOrg, setGetOrg] = useState<OrganizationScheme>({});
 	useEffect(() => {
 		if (handleCheckInnMutate.data) {
 			setGetOrg(handleCheckInnMutate.data);
@@ -194,7 +194,18 @@ const CreateContracts = () => {
 								))}
 						</div> */}
 						<div className="docs__content">
-							<CardOrganization item={getOrg} />
+							{/* <CardOrganization item={getOrg} /> */}
+							<OrganizationCard data={getOrg} />
+							<UserCard
+								id="1"
+								fullname="Рохбар Рохбаров"
+								position="Руководитель"
+							/>
+							<UserCard
+								id="2"
+								fullname="Сармухосиб Сармухосибев"
+								position="Бухгалтер"
+							/>
 						</div>
 					</section>
 				</>

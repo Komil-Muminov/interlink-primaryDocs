@@ -6,7 +6,7 @@ import { OrganizationScheme } from "../../../../API/services/organizations/Organ
 import { getOrganizationById } from "../../../../API/services/organizations/getOrganizationById";
 import PanelControl from "../../../../UI/Panel Control/PanelControl";
 import TitleSection from "../../../../UI/Title of Section/TitleSection";
-import Orgcard from "../../../Orgcard/Orgcard";
+import Orgcard from "../../../../UI/Card of Organization/Orgcard/Orgcard";
 import Registry from "../../../../components/Registry/Registry";
 import "./ShowContracts.css";
 // import CardOrganization from "../../../UI/Card of Organization/CardOrganization";
