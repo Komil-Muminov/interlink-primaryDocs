@@ -13,8 +13,8 @@ import { createOrganization } from "../../../../API/services/organizations/creat
 import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
-import "./Constructor.css";
 import CardOrganization from "../../../../UI/Card of Organization/CardOrganization";
+import "./CreateContracts.css";
 
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
 // import EditIcon from "@mui/icons-material/Edit";
@@ -29,7 +29,7 @@ import CardOrganization from "../../../../UI/Card of Organization/CardOrganizati
 // import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-const CreatePrimaryDoc = () => {
+const CreateContracts = () => {
 	const { register, watch, control, handleSubmit, setValue, getValues } =
 		useForm<OrganizationScheme>({
 			defaultValues: {
@@ -107,7 +107,7 @@ const CreatePrimaryDoc = () => {
 
 		createOrganizationMutate.mutate(formData);
 
-		navigate(`/crm/show/${orgId}`);
+		navigate(`/contracts/show/${orgId}`);
 	};
 
 	// Функция для удаления файла по индексу
@@ -150,7 +150,7 @@ const CreatePrimaryDoc = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 	return (
-		<main className="create-crm">
+		<main className="create-contracts">
 			<TitleSection title="Новый договор" />
 			<PanelControl
 				handleSubmit={handleSubmit(onSubmit)}
@@ -203,4 +203,4 @@ const CreatePrimaryDoc = () => {
 	);
 };
 
-export default CreatePrimaryDoc;
+export default CreateContracts;

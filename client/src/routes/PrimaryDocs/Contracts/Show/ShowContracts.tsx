@@ -8,12 +8,12 @@ import PanelControl from "../../../../UI/Panel Control/PanelControl";
 import TitleSection from "../../../../UI/Title of Section/TitleSection";
 import Orgcard from "../../../Orgcard/Orgcard";
 import Registry from "../../../../components/Registry/Registry";
-import "./ShowDocs.css";
+import "./ShowContracts.css";
 // import CardOrganization from "../../../UI/Card of Organization/CardOrganization";
 // import { getOrganizations } from "../../../API/services/organizations/getOrganizations";
 // import { dataFilter } from "../../../API/data/dataFilter";
 
-const ShowCRM = () => {
+const ShowContracts = () => {
   const { id: orgId } = useParams();
 
   const getOrganizationsQuery = useQuery(
@@ -254,7 +254,7 @@ const ShowCRM = () => {
   console.log(rows);
 
   return (
-    <main className="show-crm">
+    <main className="show-contracts">
       <TitleSection title={organizationsById ? organizationsById?.name : ""} />
       <PanelControl editButtonState={false} saveButtonState={true} />
       <TitleSection title="Карточка организации" />
@@ -303,4 +303,4 @@ const ShowCRM = () => {
   );
 };
 
-export default ShowCRM;
+export default ShowContracts;

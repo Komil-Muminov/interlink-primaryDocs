@@ -20,8 +20,8 @@ const Registry = ({ headersProps, rowsProps, status }: TProps) => {
   const navigate = useNavigate();
 
   const handleRowClick = (rowId: string) => {
-    if (location.pathname === "/crm") {
-      navigate(`/crm/show/${rowId}`); // Навигация на нужный путь
+    if (location.pathname === "/primary-docs/contracts") {
+      navigate(`/primary-docs/contracts/show/${rowId}`); // Навигация на нужный путь
     }
   };
 
@@ -59,39 +59,6 @@ const Registry = ({ headersProps, rowsProps, status }: TProps) => {
         ))}
       </tbody>
     </table>
-
-    // <div className="flex-table-body">
-    //   {rows?.map((row: any[], rowIndex: React.Key | null | undefined) => (
-    //     <Link
-    //       key={rowIndex}
-    //       to={`${location.pathname === "/crm" ? `/crm/show/${row[0]}` : "#"}`}
-    //     >
-    //       {/* Используем id для навигации */}
-    //       <div className="flex-row">
-    //         {row.slice(1).map(
-    //           (
-    //             cell,
-    //             cellIndex // Пропускаем id, чтобы не отображать его в таблице
-    //           ) => (
-    //             <div key={cellIndex} className="flex-cell">
-    //               <p
-    //                 className={
-    //                   cell === status.active
-    //                     ? "active-status"
-    //                     : cell === status.inactive
-    //                     ? "inactive-status"
-    //                     : ""
-    //                 }
-    //               >
-    //                 {cell}
-    //               </p>
-    //             </div>
-    //           )
-    //         )}
-    //       </div>
-    //     </Link>
-    //   ))}
-    // </div>
   );
 };
 
