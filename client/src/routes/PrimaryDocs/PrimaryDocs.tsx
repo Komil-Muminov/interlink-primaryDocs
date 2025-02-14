@@ -3,11 +3,7 @@ import "./PrimaryDocs.css";
 import { Outlet } from "react-router";
 
 const PrimaryDocs = () => {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  return <div>Список подмодулей</div>;
 };
 
 export default PrimaryDocs;

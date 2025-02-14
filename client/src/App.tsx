@@ -5,7 +5,7 @@ import { Loader } from "./UI/Loader/Loader";
 import Header from "./Components/Header/Header";
 
 const LazyAuthrozation = lazy(
-	() => import("./routes/Auth/Authorization/Authorization"),
+  () => import("./routes/Auth/Authorization/Authorization")
 );
 const LazyLogMe = lazy(() => import("./routes/Auth/Logme/Logme"));
 const LazyRegMe = lazy(() => import("./routes/Auth/Regme/Regme"));
@@ -46,7 +46,7 @@ const LazyShowContracts = lazy(
 );
 // const LazyOrgcard = lazy(() => import("./routes/Orgcard/Orgcard"));
 function App() {
-	const location = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     if (
@@ -66,32 +66,46 @@ function App() {
           <div className="app__content">
             <Suspense fallback={<Loader />}>
               <Routes>
-                <Route path="/primary-docs" element={<LazyPrimaryDocs />}>
-                  {/* Contracts */}
-                  <Route path="contracts" element={<LazyContracts />}>
-                    <Route path="create" element={<LazyCreateContracts />} />
-                    <Route path="show/:id" element={<LazyShowContracts />} />
-                  </Route>
-                  {/* Invoices */}
-                  <Route path="invoices" element={<LazyInvoices />}></Route>
-                  {/* Overhead */}
-                  <Route path="overhead" element={<LazyOverhead />}></Route>
-                  {/* Power of attorney */}
-                  <Route
-                    path="power-of-attorney"
-                    element={<LazyPowerAttorney />}
-                  ></Route>
-                  {/* Travel exprenses */}
-                  <Route
-                    path="travel-exprenses"
-                    element={<LazyTravelExprenses />}
-                  ></Route>
-                  {/* Certificate of completion of work */}
-                  <Route
-                    path="certificate-of-completion-of-work"
-                    element={<LazyCertificateCompletionWork />}
-                  ></Route>
-                </Route>
+                <Route path="/primary-docs" element={<LazyPrimaryDocs />} />
+                {/* Contracts */}
+                <Route
+                  path="primary-docs/contracts"
+                  element={<LazyContracts />}
+                />
+                <Route
+                  path="primary-docs/contracts/create"
+                  element={<LazyCreateContracts />}
+                />
+                <Route
+                  path="primary-docs/contracts/show/:id"
+                  element={<LazyShowContracts />}
+                />
+                {/* Invoices */}
+                <Route
+                  path="primary-docs/invoices"
+                  element={<LazyInvoices />}
+                />
+                {/* Overhead */}
+                <Route
+                  path="primary-docs/overhead"
+                  element={<LazyOverhead />}
+                />
+                {/* Power of attorney */}
+                <Route
+                  path="primary-docs/power-of-attorney"
+                  element={<LazyPowerAttorney />}
+                />
+                {/* Travel exprenses */}
+                <Route
+                  path="primary-docs/travel-exprenses"
+                  element={<LazyTravelExprenses />}
+                />
+                {/* Certificate of completion of work */}
+                <Route
+                  path="primary-docs/certificate-of-completion-of-work"
+                  element={<LazyCertificateCompletionWork />}
+                />
+
                 {/* Main route */}
                 <Route path="/" element={<LazyAuthrozation />} />
                 {/* Authorization */}

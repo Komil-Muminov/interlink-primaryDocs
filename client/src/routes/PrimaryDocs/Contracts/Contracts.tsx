@@ -11,66 +11,65 @@ import "../PrimaryDocs.css";
 import "./Contracts.css";
 
 const Contracts: React.FC = () => {
-	const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
+  const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
 
-	const getOrganizationsQuery = useQuery(
-		{
-			queryFn: () => getOrganizations(),
-			queryKey: ["organizations"],
-		},
-		queryClient,
-	);
+  const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
 
-	useEffect(() => {
-		if (getOrganizationsQuery.status === "success") {
-			setOrganizations(getOrganizationsQuery.data);
-		}
-	}, [getOrganizationsQuery.data]);
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery.data]);
 
-	const headers = dataFilter
-		.filter((e) => {
-			return [
-				"Номер списка",
-				"Идентификатор",
-				"Наименование",
-				"ИНН организации",
-				"Тип организации",
-				"Статус",
-			].includes(e.title);
-		})
-		.map((e) => e.title);
+  const headers = dataFilter
+    .filter((e) => {
+      return [
+        "Номер списка",
+        "Идентификатор",
+        "Наименование",
+        "ИНН организации",
+        "Тип организации",
+        "Статус",
+      ].includes(e.title);
+    })
+    .map((e) => e.title);
 
-	const rows = organizations.map((org: OrganizationScheme, index) => [
-		org.id, // Добавляем id в начало строки, но не отображаем его
-		index + 1, // Номер списка
-		org.identificator, // Идентификатор
-		org.name, // Наименование
-		org.tax, // ИНН организации
-		org.orgType, // Тип организации
-		org.status, // Статус
-	]);
+  const rows = organizations.map((org: OrganizationScheme, index) => [
+    org.id, // Добавляем id в начало строки, но не отображаем его
+    index + 1, // Номер списка
+    org.identificator, // Идентификатор
+    org.name, // Наименование
+    org.tax, // ИНН организации
+    org.orgType, // Тип организации
+    org.status, // Статус
+  ]);
 
-	return (
-		<main className="submodule-contracts">
-			<Outlet />
-			<section>
-				<h1 className="module-title">Реестр</h1>
-				<div className="panel-control-filter">
-					<Filter data={dataFilter} />
-					<Link to="create">
-						<button>Добавить</button>
-					</Link>
-				</div>
-			</section>
-			<section>
-				<Registry
-					headersProps={headers}
-					rowsProps={rows}
-					status={{ active: "Активный", inactive: "Неактивный" }}
-				/>
-			</section>
-		</main>
-	);
+  return (
+    <main className="submodule-contracts">
+      <section>
+        <h1 className="module-title">Реестр</h1>
+        <div className="panel-control-filter">
+          <Filter data={dataFilter} />
+          <Link to="create">
+            <button>Добавить</button>
+          </Link>
+        </div>
+      </section>
+      <section>
+        <Registry
+          headersProps={headers}
+          rowsProps={rows}
+          status={{ active: "Активный", inactive: "Неактивный" }}
+        />
+      </section>
+    </main>
+  );
 };
 
 export default Contracts;
