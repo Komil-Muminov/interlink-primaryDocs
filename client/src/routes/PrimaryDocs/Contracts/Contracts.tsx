@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import Filter from "../../../components/Filter/Filter";
 import { dataFilter } from "../../../API/data/dataFilter";
 import Registry from "../../../components/Registry/Registry";
-import { Link } from "react-router";
+import { Link, Outlet } from "react-router";
 import { getOrganizations } from "../../../API/services/organizations/getOrganizations";
 import { queryClient } from "../../../API/hooks/queryClient";
 import { useQuery } from "@tanstack/react-query";
 import { OrganizationScheme } from "../../../API/services/organizations/OrganizationScheme";
-import "./PrimaryDocs.css";
+import "./Contracts.css";
 
-const Crm = () => {
+const Contracts = () => {
   const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
 
   const getOrganizationsQuery = useQuery(
@@ -51,11 +51,12 @@ const Crm = () => {
 
   return (
     <main className="submodule-crm">
+      <Outlet />
       <section>
         <h1 className="module-title">Реестр</h1>
         <div className="panel-control-filter">
           <Filter data={dataFilter} />
-          <Link to="/crm/create">
+          <Link to="create">
             <button>Добавить</button>
           </Link>
         </div>
@@ -71,4 +72,4 @@ const Crm = () => {
   );
 };
 
-export default Crm;
+export default Contracts;
