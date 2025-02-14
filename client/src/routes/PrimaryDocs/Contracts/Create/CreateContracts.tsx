@@ -110,7 +110,7 @@ const CreateContracts = () => {
 
     createOrganizationMutate.mutate(formData);
 
-    navigate(`/crm/show/${orgId}`);
+    navigate(`/contracts/show/${orgId}`);
   };
 
   // Функция для удаления файла по индексу
@@ -152,7 +152,7 @@ const CreateContracts = () => {
   }, [Inn, handleCheckInnMutate.data]);
   console.log(isValidInn);
   return (
-    <main className="create-crm">
+    <main className="create-contracts">
       <TitleSection title="Новый договор" />
       <PanelControl
         handleSubmit={handleSubmit(onSubmit)}

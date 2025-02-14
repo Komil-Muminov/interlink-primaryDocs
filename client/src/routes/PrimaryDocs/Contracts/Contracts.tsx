@@ -50,7 +50,7 @@ const Contracts = () => {
   ]);
 
   return (
-    <main className="submodule-crm">
+    <main className="submodule-contracts">
       <Outlet />
       <section>
         <h1 className="module-title">Реестр</h1>
