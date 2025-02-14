@@ -3,12 +3,13 @@
 	border-radius: 10px;
 	overflow: hidden;
 	border: 1px solid #00000020;
-	width: 50%;
+	width: 100%;
 }
 
 .user-card .content {
 	display: flex;
 	justify-content: center;
+	padding: 20px;
 	align-items: center;
 	flex-direction: column;
 	gap: 20px;

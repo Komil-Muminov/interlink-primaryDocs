@@ -150,7 +150,7 @@ const CreateContracts = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 	return (
-		<main className="create-contracts">
+		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
 			<PanelControl
 				handleSubmit={handleSubmit(onSubmit)}
@@ -193,19 +193,21 @@ const CreateContracts = () => {
 									/>
 								))}
 						</div> */}
-						<div className="docs__content">
+						<div className="contracts__docs-content">
 							{/* <CardOrganization item={getOrg} /> */}
 							<OrganizationCard data={getOrg} />
-							<UserCard
-								id="1"
-								fullname="Рохбар Рохбаров"
-								position="Руководитель"
-							/>
-							<UserCard
-								id="2"
-								fullname="Сармухосиб Сармухосибев"
-								position="Бухгалтер"
-							/>
+							<div className="contracts__docs-ucard">
+								<UserCard
+									id="1"
+									fullname="Рохбар Рохбаров"
+									position="Руководитель"
+								/>
+								<UserCard
+									id="2"
+									fullname="Сармухосиб Сармухосибев"
+									position="Бухгалтер"
+								/>
+							</div>
 						</div>
 					</section>
 				</>
