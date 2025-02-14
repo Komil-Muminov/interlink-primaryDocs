@@ -1,0 +1,68 @@
+.organization-card {
+  width: 49%;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #00000020;
+}
+
+.wrapper-image {
+  min-height: 430px;
+  background-image: url(../../../assets/organization-card-image-2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.organization-card .content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content .wrapper-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapper-info p.title {
+  font-size: 24px;
+  color: #313131;
+}
+
+.wrapper-info .info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrapper-info .info-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wrapper-info .info-list li p {
+  color: #313131;
+  font-weight: bold;
+}
+
+.wrapper-info .info-list li p span {
+  font-weight: normal;
+}
+
+.organization-card .content .panel-control {
+  justify-content: start;
+  gap: 20px;
+  padding: 0;
+  box-shadow: none;
+}
+
+.organization-card .content .panel-control button {
+  background-color: var(--primary-color);
+  width: 50%;
+  border-radius: 30px;
+  padding: 10px;
+}
