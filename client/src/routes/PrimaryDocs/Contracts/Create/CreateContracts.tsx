@@ -156,7 +156,7 @@ const CreateContracts = () => {
 	// Подтвердить данные при создание дока
 	const [confirm, setConfirm] = useState<boolean>(false);
 	useEffect(() => {
-		// Если confirm то рендирить надо компонент согласование
+		// Если confirm то рендирить(или переход) надо компонент согласование
 	}, [confirm]);
 	return (
 		<main className="contracts create-contracts">
