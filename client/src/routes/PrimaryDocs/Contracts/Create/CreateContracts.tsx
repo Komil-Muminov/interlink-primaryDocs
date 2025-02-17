@@ -142,13 +142,22 @@ const CreateContracts = () => {
 		handleCheckInnMutate.mutate(data);
 	};
 
-	const [getOrg, setGetOrg] = useState<OrganizationScheme>({});
+	const [getOrg, setGetOrg] = useState<OrganizationScheme>();
 	useEffect(() => {
 		if (handleCheckInnMutate.data) {
 			setGetOrg(handleCheckInnMutate.data);
 			setIsValidInn(true);
 		}
 	}, [Inn, handleCheckInnMutate.data]);
+
+	// Подтвердить
+	const [confirm, setConfirm] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (confirm) {
+			navigate("./contracts");
+		}
+	}, [confirm]);
 	return (
 		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
@@ -209,6 +218,7 @@ const CreateContracts = () => {
 								/>
 							</div>
 						</div>
+						<Button onClick={() => setConfirm(!confirm)}>Подтвердить</Button>
 					</section>
 				</>
 			) : null}
