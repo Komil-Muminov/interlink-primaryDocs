@@ -223,7 +223,7 @@ const CreateContracts = () => {
 				</>
 			) : (
 				<div className="invalid-inn">
-					<p>Организаия по такому ИНН отсутвуюет</p>
+					<p>Организация с указанным ИНН не найдена.</p>
 				</div>
 			)}
 		</main>
