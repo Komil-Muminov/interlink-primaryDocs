@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TitleSection from "../../../../UI/Title of Section/TitleSection";
 import PanelControl from "../../../../UI/Panel Control/PanelControl";
-import { Button } from "@mui/material";
+import { Button, setRef } from "@mui/material";
 
 // ---------------------------------------------------------------------
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { OrganizationScheme } from "../../../../API/services/organizations/Organ
 import Input from "../../../../UI/Input/Input";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../API/hooks/queryClient";
+import { createOrganization } from "../../../../API/services/organizations/createOrganization";
 import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
 import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
@@ -16,7 +17,6 @@ import UserCard from "../../../../UI/Card/User Card/UserCard";
 import { useScroll } from "../../../../API/hooks/useScroll";
 import "./CreateContracts.css";
 
-// import { createOrganization } from "../../../../API/services/organizations/createOrganization";
 // import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
 // import EditIcon from "@mui/icons-material/Edit";
@@ -32,7 +32,7 @@ import "./CreateContracts.css";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const CreateContracts = () => {
-	const { register, watch, handleSubmit, getValues } =
+	const { register, watch, handleSubmit, setValue, getValues } =
 		useForm<OrganizationScheme>({
 			defaultValues: {
 				tax: "",
@@ -64,20 +64,16 @@ const CreateContracts = () => {
 
 	// const navigate = useNavigate();
 
-	// const createOrganizationMutate = useMutation<any, Error, FormData>({
-	// 	mutationFn: (formData: FormData) => createOrganization(formData),
-	// 	onSuccess: () =>
-	// 		queryClient.invalidateQueries({ queryKey: "organizations" }),
-	// });
+	const formValues = watch();
+
+	const createOrganizationMutate = useMutation<any, Error, FormData>({
+		mutationFn: (formData: FormData) => createOrganization(formData),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: "organizations" }),
+	});
 
 	// data: OrganizationScheme; arg func
-
-	const [confirm, setConfirm] = useState<boolean>(false);
 	const onSubmit = () => {
-		if (isValidInn) {
-			handleScroll(true);
-			alert("km");
-		}
 		// const formData = new FormData();
 		// Добавляем остальные текстовые поля
 		// const orgId = generateUniqueId();
@@ -125,7 +121,6 @@ const CreateContracts = () => {
 	const Inn = getValues("tax");
 	const [isValidInn, setIsValidInn] = useState<boolean>(false);
 
-	// Отправка ИНН на сервер
 	const handleCheckInnMutate = useMutation(
 		{
 			mutationFn: () => validInn(Inn),
@@ -143,7 +138,6 @@ const CreateContracts = () => {
 		handleCheckInnMutate.mutate(data);
 	};
 
-	// Получение данных об организанции
 	const [getOrg, setGetOrg] = useState<OrganizationScheme>();
 	useEffect(() => {
 		if (handleCheckInnMutate.data) {
@@ -152,12 +146,16 @@ const CreateContracts = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 
+	// Подтвердить данные при создание дока (AMI)
+	// const [confirm, setConfirm] = useState<boolean>(false);
+	// useEffect(() => {
+	// Если confirm то рендирить(или переход) надо компонент согласование
+	// }, [confirm]);
+
 	// ScrollTo
-	const { ref, handleScroll } = useScroll();
+	const { setRefs, scrollTo } = useScroll();
 	useEffect(() => {
-		if (isValidInn) {
-			handleScroll(true);
-		}
+		scrollTo("contracts");
 	}, [isValidInn]);
 	return (
 		<main className="contracts create-contracts">
@@ -181,7 +179,6 @@ const CreateContracts = () => {
 						borderRadiusStyle="30px"
 						heightStyle="90%"
 						widthStyle="85%"
-						// disabled={isValidInn}
 					/>
 					<Button type="submit" className="btn-mui constructon__btn--active">
 						{/* <FindInPageIcon sx={{ alignSelf: "center" }} />{" "} */}
@@ -204,7 +201,7 @@ const CreateContracts = () => {
 									/>
 								))}
 						</div> */}
-						<div ref={ref} className="contracts__docs-content">
+						<div ref={setRefs("contracts")} className="contracts__docs-content">
 							{/* <CardOrganization item={getOrg} /> */}
 							<OrganizationCard data={getOrg} />
 							<div className="contracts__docs-ucard">
@@ -220,11 +217,13 @@ const CreateContracts = () => {
 								/>
 							</div>
 						</div>
+
+						<div ref={setRefs("test")}>test</div>
 					</section>
 				</>
 			) : (
-				<div className="invalid__inn">
-					<p>{`Организация по данному ИНН не найдена`}</p>
+				<div className="invalid-inn">
+					<p>Организаия по такому ИНН отсутвуюет</p>
 				</div>
 			)}
 		</main>
