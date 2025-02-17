@@ -2,10 +2,6 @@ import { Avatar, Button } from "@mui/material";
 import { UserCardData } from "../../../API/data/UserCardData";
 import "./UserCard.css";
 
-interface TProps {
-	data: UserCardData;
-}
-
 const UserCard: React.FC<UserCardData> = ({ fullname, position }) => {
 	return (
 		<div className="user-card">
