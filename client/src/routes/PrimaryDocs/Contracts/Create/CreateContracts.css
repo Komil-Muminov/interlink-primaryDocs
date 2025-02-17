@@ -60,7 +60,3 @@ section {
 	flex-direction: column;
 	gap: 10px;
 }
-
-.btn-confirm {
-	margin: 0 auto;
-}
