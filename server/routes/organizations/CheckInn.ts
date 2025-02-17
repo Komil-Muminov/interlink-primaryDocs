@@ -11,6 +11,7 @@ export const CheckInn: RequestHandler = async (req: Request, res: Response) => {
 		const getValidInn = organizations.find((item) => item.tax === inn);
 
 		if (getValidInn) {
+			console.log(typeof getValidInn);
 			return res.status(200).json(getValidInn);
 		} else {
 			return res.status(400).json({ message: "Инн организации не валиден" });

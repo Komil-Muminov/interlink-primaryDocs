@@ -150,12 +150,12 @@ const CreateContracts = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 
-	// Подтвердить
+	// Подтвердить данные при создание дока
 	const [confirm, setConfirm] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (confirm) {
-			navigate("./contracts");
+			navigate("./contracts:id");
 		}
 	}, [confirm]);
 	return (
@@ -217,8 +217,14 @@ const CreateContracts = () => {
 									position="Бухгалтер"
 								/>
 							</div>
+							<Button
+								className="btn-mui constructon__btn--active btn-confirm"
+								onClick={() => setConfirm(!confirm)}
+								sx={{ margin: "0 auto" }}
+							>
+								Подтвердить
+							</Button>
 						</div>
-						<Button onClick={() => setConfirm(!confirm)}>Подтвердить</Button>
 					</section>
 				</>
 			) : null}
