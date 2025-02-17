@@ -217,8 +217,6 @@ const CreateContracts = () => {
 								/>
 							</div>
 						</div>
-
-						<div ref={setRefs("test")}>test</div>
 					</section>
 				</>
 			) : (
