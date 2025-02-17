@@ -1,7 +1,9 @@
 import { OrganizationScheme } from "../services/organizations/OrganizationScheme";
 
 export const useValid = () => {
-	const validInn = async (inn: string): Promise<OrganizationScheme[]> => {
+	const validInn = async (
+		inn: string,
+	): Promise<{ inn: OrganizationScheme }> => {
 		return fetch(`http://localhost:3000/organizations/checkinn`, {
 			method: "POST",
 			headers: {
