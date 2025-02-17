@@ -10,13 +10,14 @@ import Input from "../../../../UI/Input/Input";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../API/hooks/queryClient";
 import { createOrganization } from "../../../../API/services/organizations/createOrganization";
-import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
-import "./CreateContracts.css";
 import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
 import UserCard from "../../../../UI/Card/User Card/UserCard";
+import { useScrollTo } from "../../../../API/hooks/useScrollTo";
+import "./CreateContracts.css";
 
+// import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
 // import EditIcon from "@mui/icons-material/Edit";
 // import AddIcon from "@mui/icons-material/Add";
@@ -73,10 +74,6 @@ const CreateContracts = () => {
 
 	// data: OrganizationScheme; arg func
 	const onSubmit = () => {
-		if (validInn) {
-			setConfirm(true);
-		}
-
 		// const formData = new FormData();
 		// Добавляем остальные текстовые поля
 		// const orgId = generateUniqueId();
@@ -97,20 +94,16 @@ const CreateContracts = () => {
 		// formData.append("pbs", data.pbs);
 		// formData.append("categoryBudget", data.categoryBudget);
 		// formData.append("orgType", data.orgType);
-
 		// Для массивов (например, bz и details) можно сериализовать JSON-строкой или отправлять как есть,
 		// в зависимости от серверной логики.
 		// formData.append("bz", JSON.stringify(data.bz));
 		// formData.append("details", JSON.stringify(data.details));
-
 		// Добавляем файлы
 		// data.files.forEach((file, index) => {
 		// 	formData.append("files", file);
 		// });
-
 		// formData.append("status", "Активный");
 		// createOrganizationMutate.mutate(formData);
-
 		// navigate(`/contracts/show/${orgId}`);
 	};
 
@@ -154,10 +147,15 @@ const CreateContracts = () => {
 	}, [Inn, handleCheckInnMutate.data]);
 
 	// Подтвердить данные при создание дока
+
 	const [confirm, setConfirm] = useState<boolean>(false);
 	useEffect(() => {
 		// Если confirm то рендирить(или переход) надо компонент согласование
 	}, [confirm]);
+
+	// ScrollTo
+
+	const { ref, scrollTo } = useScrollTo();
 	return (
 		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
@@ -202,9 +200,10 @@ const CreateContracts = () => {
 									/>
 								))}
 						</div> */}
-						<div className="contracts__docs-content">
+						<div ref={ref} className="contracts__docs-content">
 							{/* <CardOrganization item={getOrg} /> */}
 							<OrganizationCard data={getOrg} />
+							<button onClick={scrollTo}>Скроллить</button>
 							<div className="contracts__docs-ucard">
 								<UserCard
 									id="1"
