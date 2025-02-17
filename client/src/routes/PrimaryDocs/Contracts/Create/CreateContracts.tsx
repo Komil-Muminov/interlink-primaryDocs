@@ -10,13 +10,14 @@ import Input from "../../../../UI/Input/Input";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../API/hooks/queryClient";
 import { createOrganization } from "../../../../API/services/organizations/createOrganization";
-import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
-import "./CreateContracts.css";
 import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
 import UserCard from "../../../../UI/Card/User Card/UserCard";
+import { useScroll } from "../../../../API/hooks/useScroll";
+import "./CreateContracts.css";
 
+// import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
 // import EditIcon from "@mui/icons-material/Edit";
 // import AddIcon from "@mui/icons-material/Add";
@@ -71,54 +72,49 @@ const CreateContracts = () => {
 			queryClient.invalidateQueries({ queryKey: "organizations" }),
 	});
 
-	const onSubmit = (data: OrganizationScheme) => {
-		const formData = new FormData();
-
+	// data: OrganizationScheme; arg func
+	const onSubmit = () => {
+		// const formData = new FormData();
 		// Добавляем остальные текстовые поля
-		const orgId = generateUniqueId();
-		formData.append("id", orgId);
-		formData.append("tax", data.tax);
-		formData.append("identificator", data.identificator);
-		formData.append("name", data.name);
-		formData.append("docNo", data.docNo);
+		// const orgId = generateUniqueId();
+		// formData.append("id", orgId);
+		// formData.append("tax", data.tax);
+		// formData.append("identificator", data.identificator);
+		// formData.append("name", data.name);
+		// formData.append("docNo", data.docNo);
 		// Если поле dateDoc не пустое, можно привести к строке:
-		if (data.dateDoc) {
-			formData.append("dateDoc", data.dateDoc.toISOString());
-		}
-		formData.append("address", data.address);
-		formData.append("terCode", data.terCode);
-		formData.append("unitAccountingTer", data.unitAccountingTer);
-		formData.append("grbsResonsible", data.grbsResonsible);
-		formData.append("grbs", data.grbs);
-		formData.append("pbs", data.pbs);
-		formData.append("categoryBudget", data.categoryBudget);
-		formData.append("orgType", data.orgType);
-
+		// if (data.dateDoc) {
+		// 	formData.append("dateDoc", data.dateDoc.toISOString());
+		// }
+		// formData.append("address", data.address);
+		// formData.append("terCode", data.terCode);
+		// formData.append("unitAccountingTer", data.unitAccountingTer);
+		// formData.append("grbsResonsible", data.grbsResonsible);
+		// formData.append("grbs", data.grbs);
+		// formData.append("pbs", data.pbs);
+		// formData.append("categoryBudget", data.categoryBudget);
+		// formData.append("orgType", data.orgType);
 		// Для массивов (например, bz и details) можно сериализовать JSON-строкой или отправлять как есть,
 		// в зависимости от серверной логики.
-		formData.append("bz", JSON.stringify(data.bz));
-		formData.append("details", JSON.stringify(data.details));
-
+		// formData.append("bz", JSON.stringify(data.bz));
+		// formData.append("details", JSON.stringify(data.details));
 		// Добавляем файлы
-		data.files.forEach((file, index) => {
-			formData.append("files", file);
-		});
-
-		formData.append("status", "Активный");
-
-		createOrganizationMutate.mutate(formData);
-
-		navigate(`/contracts/show/${orgId}`);
+		// data.files.forEach((file, index) => {
+		// 	formData.append("files", file);
+		// });
+		// formData.append("status", "Активный");
+		// createOrganizationMutate.mutate(formData);
+		// navigate(`/contracts/show/${orgId}`);
 	};
 
 	// Функция для удаления файла по индексу
-	const handleDelete = (fileIndex: number) => {
-		const currentFiles = getValues("files") || [];
-		const updatedFiles = currentFiles.filter(
-			(_: any, index: number) => index !== fileIndex,
-		);
-		setValue("files", updatedFiles);
-	};
+	// const handleDelete = (fileIndex: number) => {
+	// 	const currentFiles = getValues("files") || [];
+	// 	const updatedFiles = currentFiles.filter(
+	// 		(_: any, index: number) => index !== fileIndex,
+	// 	);
+	// 	setValue("files", updatedFiles);
+	// };
 
 	// Watch INN
 	const { validInn } = useValid();
@@ -150,21 +146,26 @@ const CreateContracts = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 
-	// Подтвердить данные при создание дока
-	const [confirm, setConfirm] = useState<boolean>(false);
+	// Подтвердить данные при создание дока (AMI)
+	// const [confirm, setConfirm] = useState<boolean>(false);
+	// useEffect(() => {
+	// Если confirm то рендирить(или переход) надо компонент согласование
+	// }, [confirm]);
 
+	// ScrollTo
+	const { ref, scroll, handleScroll } = useScroll();
 	useEffect(() => {
-		if (confirm) {
-			navigate("./contracts:id");
+		if (isValidInn) {
+			handleScroll(true);
 		}
-	}, [confirm]);
+	});
 	return (
 		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
 			<PanelControl
 				handleSubmit={handleSubmit(onSubmit)}
-				editButtonState={true}
-				saveButtonState={false}
+				saveButtonState={!isValidInn ? true : false}
+				// editButtonState
 			/>
 			<TitleSection title="Данные организации" />
 			<section>
@@ -202,7 +203,7 @@ const CreateContracts = () => {
 									/>
 								))}
 						</div> */}
-						<div className="contracts__docs-content">
+						<div ref={ref} className="contracts__docs-content">
 							{/* <CardOrganization item={getOrg} /> */}
 							<OrganizationCard data={getOrg} />
 							<div className="contracts__docs-ucard">
@@ -217,13 +218,6 @@ const CreateContracts = () => {
 									position="Бухгалтер"
 								/>
 							</div>
-							<Button
-								className="btn-mui constructon__btn--active btn-confirm"
-								onClick={() => setConfirm(!confirm)}
-								sx={{ margin: "0 auto" }}
-							>
-								Подтвердить
-							</Button>
 						</div>
 					</section>
 				</>

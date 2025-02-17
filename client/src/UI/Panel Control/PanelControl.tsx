@@ -8,13 +8,13 @@ import { useNavigate } from "react-router";
 
 interface TProps {
 	handleSubmit?: React.MouseEventHandler;
-	editButtonState: boolean;
+	editButtonState?: boolean;
 	saveButtonState: boolean;
 }
 
 const PanelControl = ({
+	// editButtonState,
 	handleSubmit,
-	editButtonState,
 	saveButtonState,
 }: TProps) => {
 	const navigate = useNavigate();
@@ -36,7 +36,7 @@ const PanelControl = ({
 				</Button>
 			</div>
 			<div className="action-buttons">
-				<Button
+				{/* <Button
 					disabled={editButtonState}
 					sx={{
 						display: "flex",
@@ -47,7 +47,7 @@ const PanelControl = ({
 					variant="text"
 				>
 					<EditIcon /> <p>Редактировать</p>
-				</Button>
+				</Button> */}
 				<Button
 					disabled={saveButtonState}
 					onClick={handleSubmit}

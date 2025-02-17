@@ -1,7 +1,6 @@
-import React from "react";
 import "./OrganizationCard.css";
 
-import orgCardImage from "../../../assets/organization-card-image-1.png";
+import tjLogo from "../../../assets/tj-logo-img.jpg";
 import { Button } from "@mui/material";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
@@ -24,8 +23,13 @@ const OrganizationCard = ({ data, handleClick, target }: TProps) => {
 			<div className="wrapper-image"></div>
 			<div className="content">
 				<div className="wrapper-info">
-					<p className="title">{data?.name}</p>
 					<ul className="info-list">
+						<li>
+							<CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
+							<p>
+								Наименование организации: <span>{data?.name}</span>
+							</p>
+						</li>
 						<li>
 							<CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
 							<p>
