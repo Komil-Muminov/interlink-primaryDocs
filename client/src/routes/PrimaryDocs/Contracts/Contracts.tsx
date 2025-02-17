@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { OrganizationScheme } from "../../../API/services/organizations/OrganizationScheme";
 import "../PrimaryDocs.css";
 import "./Contracts.css";
+import NavigationSubmodules from "../../../UI/Navigation of Modules/NavigationOfModules";
 
 const Contracts: React.FC = () => {
   const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
@@ -50,8 +51,48 @@ const Contracts: React.FC = () => {
     org.status, // Статус
   ]);
 
+  interface SubModulesListScheme {
+    id: number;
+    title: string;
+    link: string;
+  }
+
+  const submodulesList: SubModulesListScheme[] = [
+    {
+      id: 1,
+      title: "Договоры",
+      link: "/primary-docs/contracts",
+    },
+    {
+      id: 2,
+      title: "Счет-фактуры",
+      link: "/primary-docs/invoices",
+    },
+    {
+      id: 3,
+      title: "Доверенность",
+      link: "/primary-docs/overhead",
+    },
+    {
+      id: 4,
+      title: "Накладные",
+      link: "/primary-docs/power-of-attorney",
+    },
+    {
+      id: 5,
+      title: "Командировочные расходы",
+      link: "/primary-docs/travel-expenses",
+    },
+    {
+      id: 6,
+      title: "Акт выполенных работ",
+      link: "/primary-docs/certificate-of-completion-of-work",
+    },
+  ];
+
   return (
     <main className="submodule-contracts">
+      <NavigationSubmodules list={submodulesList} currentList="Договоры" />
       <section>
         <h1 className="module-title">Реестр</h1>
         <div className="panel-control-filter">
