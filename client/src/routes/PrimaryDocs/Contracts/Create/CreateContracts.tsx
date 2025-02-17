@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 import { useValid } from "../../../../API/hooks/useValid";
 import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
 import UserCard from "../../../../UI/Card/User Card/UserCard";
-import { useScrollTo } from "../../../../API/hooks/useScrollTo";
+import { useScroll } from "../../../../API/hooks/useScroll";
 import "./CreateContracts.css";
 
 // import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
@@ -146,16 +146,19 @@ const CreateContracts = () => {
 		}
 	}, [Inn, handleCheckInnMutate.data]);
 
-	// Подтвердить данные при создание дока
-
-	const [confirm, setConfirm] = useState<boolean>(false);
-	useEffect(() => {
-		// Если confirm то рендирить(или переход) надо компонент согласование
-	}, [confirm]);
+	// Подтвердить данные при создание дока (AMI)
+	// const [confirm, setConfirm] = useState<boolean>(false);
+	// useEffect(() => {
+	// Если confirm то рендирить(или переход) надо компонент согласование
+	// }, [confirm]);
 
 	// ScrollTo
-
-	const { ref, scrollTo } = useScrollTo();
+	const { ref, scroll, handleScroll } = useScroll();
+	useEffect(() => {
+		if (isValidInn) {
+			handleScroll(true);
+		}
+	});
 	return (
 		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
@@ -203,7 +206,6 @@ const CreateContracts = () => {
 						<div ref={ref} className="contracts__docs-content">
 							{/* <CardOrganization item={getOrg} /> */}
 							<OrganizationCard data={getOrg} />
-							<button onClick={scrollTo}>Скроллить</button>
 							<div className="contracts__docs-ucard">
 								<UserCard
 									id="1"
