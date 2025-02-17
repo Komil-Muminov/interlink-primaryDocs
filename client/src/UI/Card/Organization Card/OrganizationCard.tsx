@@ -23,8 +23,13 @@ const OrganizationCard = ({ data, handleClick, target }: TProps) => {
 			<div className="wrapper-image"></div>
 			<div className="content">
 				<div className="wrapper-info">
-					<p className="title">{data?.name}</p>
 					<ul className="info-list">
+						<li>
+							<CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
+							<p>
+								Наименование организации: <span>{data?.name}</span>
+							</p>
+						</li>
 						<li>
 							<CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
 							<p>
