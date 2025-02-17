@@ -71,54 +71,57 @@ const CreateContracts = () => {
 			queryClient.invalidateQueries({ queryKey: "organizations" }),
 	});
 
-	const onSubmit = (data: OrganizationScheme) => {
-		const formData = new FormData();
-
-		// Добавляем остальные текстовые поля
-		const orgId = generateUniqueId();
-		formData.append("id", orgId);
-		formData.append("tax", data.tax);
-		formData.append("identificator", data.identificator);
-		formData.append("name", data.name);
-		formData.append("docNo", data.docNo);
-		// Если поле dateDoc не пустое, можно привести к строке:
-		if (data.dateDoc) {
-			formData.append("dateDoc", data.dateDoc.toISOString());
+	// data: OrganizationScheme; arg func
+	const onSubmit = () => {
+		if (validInn) {
+			setConfirm(true);
 		}
-		formData.append("address", data.address);
-		formData.append("terCode", data.terCode);
-		formData.append("unitAccountingTer", data.unitAccountingTer);
-		formData.append("grbsResonsible", data.grbsResonsible);
-		formData.append("grbs", data.grbs);
-		formData.append("pbs", data.pbs);
-		formData.append("categoryBudget", data.categoryBudget);
-		formData.append("orgType", data.orgType);
+
+		// const formData = new FormData();
+		// Добавляем остальные текстовые поля
+		// const orgId = generateUniqueId();
+		// formData.append("id", orgId);
+		// formData.append("tax", data.tax);
+		// formData.append("identificator", data.identificator);
+		// formData.append("name", data.name);
+		// formData.append("docNo", data.docNo);
+		// Если поле dateDoc не пустое, можно привести к строке:
+		// if (data.dateDoc) {
+		// 	formData.append("dateDoc", data.dateDoc.toISOString());
+		// }
+		// formData.append("address", data.address);
+		// formData.append("terCode", data.terCode);
+		// formData.append("unitAccountingTer", data.unitAccountingTer);
+		// formData.append("grbsResonsible", data.grbsResonsible);
+		// formData.append("grbs", data.grbs);
+		// formData.append("pbs", data.pbs);
+		// formData.append("categoryBudget", data.categoryBudget);
+		// formData.append("orgType", data.orgType);
 
 		// Для массивов (например, bz и details) можно сериализовать JSON-строкой или отправлять как есть,
 		// в зависимости от серверной логики.
-		formData.append("bz", JSON.stringify(data.bz));
-		formData.append("details", JSON.stringify(data.details));
+		// formData.append("bz", JSON.stringify(data.bz));
+		// formData.append("details", JSON.stringify(data.details));
 
 		// Добавляем файлы
-		data.files.forEach((file, index) => {
-			formData.append("files", file);
-		});
+		// data.files.forEach((file, index) => {
+		// 	formData.append("files", file);
+		// });
 
-		formData.append("status", "Активный");
+		// formData.append("status", "Активный");
+		// createOrganizationMutate.mutate(formData);
 
-		createOrganizationMutate.mutate(formData);
-
-		navigate(`/contracts/show/${orgId}`);
+		// navigate(`/contracts/show/${orgId}`);
 	};
 
 	// Функция для удаления файла по индексу
-	const handleDelete = (fileIndex: number) => {
-		const currentFiles = getValues("files") || [];
-		const updatedFiles = currentFiles.filter(
-			(_: any, index: number) => index !== fileIndex,
-		);
-		setValue("files", updatedFiles);
-	};
+	// const handleDelete = (fileIndex: number) => {
+	// 	const currentFiles = getValues("files") || [];
+	// 	const updatedFiles = currentFiles.filter(
+	// 		(_: any, index: number) => index !== fileIndex,
+	// 	);
+	// 	setValue("files", updatedFiles);
+	// };
 
 	// Watch INN
 	const { validInn } = useValid();
@@ -152,19 +155,16 @@ const CreateContracts = () => {
 
 	// Подтвердить данные при создание дока
 	const [confirm, setConfirm] = useState<boolean>(false);
-
 	useEffect(() => {
-		if (confirm) {
-			navigate("./contracts:id");
-		}
+		// Если confirm то рендирить надо компонент согласование
 	}, [confirm]);
 	return (
 		<main className="contracts create-contracts">
 			<TitleSection title="Новый договор" />
 			<PanelControl
 				handleSubmit={handleSubmit(onSubmit)}
-				editButtonState={true}
-				saveButtonState={false}
+				saveButtonState={!isValidInn ? true : false}
+				// editButtonState
 			/>
 			<TitleSection title="Данные организации" />
 			<section>
@@ -217,13 +217,6 @@ const CreateContracts = () => {
 									position="Бухгалтер"
 								/>
 							</div>
-							<Button
-								className="btn-mui constructon__btn--active btn-confirm"
-								onClick={() => setConfirm(!confirm)}
-								sx={{ margin: "0 auto" }}
-							>
-								Подтвердить
-							</Button>
 						</div>
 					</section>
 				</>
