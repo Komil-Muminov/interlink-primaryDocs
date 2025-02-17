@@ -9,6 +9,7 @@ interface TProps {
 	heightStyle: string;
 	widthStyle: string;
 	classname: string | undefined;
+	disabled?: boolean;
 }
 
 const Input = ({
@@ -19,12 +20,14 @@ const Input = ({
 	borderRadiusStyle,
 	heightStyle,
 	widthStyle,
+	disabled,
 }: TProps) => {
 	return (
 		<TextField
 			{...register(idValue)}
 			id={idValue}
 			label={labelValue}
+			disabled={disabled}
 			className={classname}
 			sx={{
 				"& .MuiOutlinedInput-root": {
