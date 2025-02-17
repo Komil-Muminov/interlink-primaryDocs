@@ -1,7 +1,6 @@
-import React from "react";
 import "./OrganizationCard.css";
 
-import orgCardImage from "../../../assets/organization-card-image-1.png";
+import tjLogo from "../../../assets/tj-logo-img.jpg";
 import { Button } from "@mui/material";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
