@@ -181,7 +181,6 @@ const CreateContracts = () => {
 						widthStyle="85%"
 					/>
 					<Button type="submit" className="btn-mui constructon__btn--active">
-						{/* <FindInPageIcon sx={{ alignSelf: "center" }} />{" "} */}
 						Получить данные
 					</Button>
 				</form>
