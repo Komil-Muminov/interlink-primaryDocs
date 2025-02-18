@@ -41,3 +41,16 @@ section {
 .wrapper-registry {
   padding: 40px;
 }
+
+.contracts__docs-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.contracts__docs-ucard {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 49%;
+}

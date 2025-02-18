@@ -7,36 +7,36 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router";
 
 interface TProps {
-	handleSubmit?: React.MouseEventHandler;
-	editButtonState?: boolean;
-	saveButtonState: boolean;
+  handleSubmit?: React.MouseEventHandler;
+  editButtonState?: boolean;
+  saveButtonState: boolean;
 }
 
 const PanelControl = ({
-	// editButtonState,
-	handleSubmit,
-	saveButtonState,
+  // editButtonState,
+  handleSubmit,
+  saveButtonState,
 }: TProps) => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	return (
-		<div className="panel-control">
-			<div className="back-button">
-				<Button
-					onClick={() => navigate(-1)}
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: "10px",
-						borderRadius: "20px",
-					}}
-					variant="text"
-				>
-					<ArrowBackIosIcon /> <p>Назад</p>
-				</Button>
-			</div>
-			<div className="action-buttons">
-				{/* <Button
+  return (
+    <div className="panel-control">
+      <div className="back-button">
+        <Button
+          onClick={() => navigate(-1)}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "20px",
+          }}
+          variant="text"
+        >
+          <ArrowBackIosIcon /> <p>Назад</p>
+        </Button>
+      </div>
+      <div className="action-buttons">
+        {/* <Button
 					disabled={editButtonState}
 					sx={{
 						display: "flex",
@@ -48,23 +48,36 @@ const PanelControl = ({
 				>
 					<EditIcon /> <p>Редактировать</p>
 				</Button> */}
-				<Button
-					disabled={saveButtonState}
-					onClick={handleSubmit}
-					type="submit"
-					sx={{
-						display: "flex",
-						alignItems: "center",
-						gap: "10px",
-						borderRadius: "20px",
-					}}
-					variant="text"
-				>
-					<SaveIcon /> <p>Сформировать</p>
-				</Button>
-			</div>
-		</div>
-	);
+        <Button
+          onClick={handleSubmit}
+          type="submit"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "20px",
+          }}
+          variant="text"
+        >
+          <SaveIcon /> <p>Сохранить</p>
+        </Button>
+        <Button
+          disabled={saveButtonState}
+          // onClick={handleSubmit}
+          type="submit"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "20px",
+          }}
+          variant="text"
+        >
+          <SaveIcon /> <p>Подтвердить</p>
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default PanelControl;

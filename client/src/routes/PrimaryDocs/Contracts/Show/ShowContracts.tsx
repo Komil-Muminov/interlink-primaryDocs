@@ -9,14 +9,59 @@ import TitleSection from "../../../../UI/Title of Section/TitleSection";
 import Orgcard from "../../../../UI/Card of Organization/Orgcard/Orgcard";
 import Registry from "../../../../components/Registry/Registry";
 import "./ShowContracts.css";
+import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
+import UserCard from "../../../../UI/Card/User Card/UserCard";
+import { getOrganizations } from "../../../../API/services/organizations/getOrganizations";
+import { ContractsScheme } from "../../../../API/services/contracts/ContractsScheme";
+import { getContracts } from "../../../../API/services/contracts/getContracts";
 // import CardOrganization from "../../../UI/Card of Organization/CardOrganization";
 // import { getOrganizations } from "../../../API/services/organizations/getOrganizations";
 // import { dataFilter } from "../../../API/data/dataFilter";
 
 const ShowContracts = () => {
-  const { id: orgId } = useParams();
+  const { id: contractId } = useParams();
+
+  // GET ORGANIZATIONS
+
+  const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
 
   const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery.data]);
+
+  // GET CONTRACTS
+
+  const [contracts, setContracts] = useState<ContractsScheme[]>([]);
+
+  const getContractsQuery = useQuery(
+    {
+      queryFn: () => getContracts(),
+      queryKey: ["contracts"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getContractsQuery.status === "success") {
+      setContracts(getContractsQuery.data);
+    }
+  }, [getContractsQuery.data]);
+
+  const contract = contracts.find((contract) => contract.id === contractId);
+
+  const orgId = contract?.orgId;
+
+  const getOrganizationByIdQuery = useQuery(
     {
       queryFn: () => getOrganizationById(orgId ? orgId : 0),
       queryKey: [`organizations-${orgId}`],
@@ -28,12 +73,12 @@ const ShowContracts = () => {
     useState<OrganizationScheme | null>(null);
 
   useEffect(() => {
-    if (getOrganizationsQuery.status === "success") {
-      setOrganizationsById(getOrganizationsQuery.data);
-    } else if (getOrganizationsQuery.status === "error") {
-      console.error(getOrganizationsQuery.error);
+    if (getOrganizationByIdQuery.status === "success") {
+      setOrganizationsById(getOrganizationByIdQuery.data);
+    } else if (getOrganizationByIdQuery.status === "error") {
+      console.error(getOrganizationByIdQuery.error);
     }
-  }, [getOrganizationsQuery]);
+  }, [getOrganizationByIdQuery]);
 
   const isActive = true;
 
@@ -251,7 +296,7 @@ const ShowContracts = () => {
 
   const rows = handleCurrentRow(correspondence, request);
 
-  console.log(rows);
+  console.log(organizationsById);
 
   return (
     <main className="show-contracts">
@@ -260,7 +305,7 @@ const ShowContracts = () => {
       <TitleSection title="Карточка организации" />
       <section>
         {/* <CardOrganization item={organizationsById} /> */}
-        <Orgcard
+        {/* <Orgcard
           data={organizationsById}
           orgName="km"
           orgType="bo"
@@ -268,7 +313,23 @@ const ShowContracts = () => {
           orglocation="испечак 2"
           directorName="km"
           headAccountantName="km"
-        />
+        /> */}
+        <div className="contracts__docs-content">
+          {/* <CardOrganization item={getOrgByTin} /> */}
+          <OrganizationCard data={organizationsById} />
+          <div className="contracts__docs-ucard">
+            <UserCard
+              id="1"
+              fullname="Рохбар Рохбаров"
+              position="Руководитель"
+            />
+            <UserCard
+              id="2"
+              fullname="Сармухосиб Сармухосибев"
+              position="Бухгалтер"
+            />
+          </div>
+        </div>
       </section>
       <TitleSection title="Данные по модулям" />
       <section className="section-tabs">

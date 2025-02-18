@@ -10,45 +10,49 @@ import { OrganizationScheme } from "../../../API/services/organizations/Organiza
 import "../PrimaryDocs.css";
 import "./Contracts.css";
 import NavigationSubmodules from "../../../UI/Navigation of Modules/NavigationOfModules";
+import { ContractsScheme } from "../../../API/services/contracts/ContractsScheme";
+import { getContracts } from "../../../API/services/contracts/getContracts";
 
 const Contracts: React.FC = () => {
-  const [organizations, setOrganizations] = useState<OrganizationScheme[]>([]);
+  const [contracts, setContracts] = useState<ContractsScheme[]>([]);
 
-  const getOrganizationsQuery = useQuery(
+  const getContractsQuery = useQuery(
     {
-      queryFn: () => getOrganizations(),
-      queryKey: ["organizations"],
+      queryFn: () => getContracts(),
+      queryKey: ["contracts"],
     },
     queryClient
   );
 
   useEffect(() => {
-    if (getOrganizationsQuery.status === "success") {
-      setOrganizations(getOrganizationsQuery.data);
+    if (getContractsQuery.status === "success") {
+      setContracts(getContractsQuery.data);
     }
-  }, [getOrganizationsQuery.data]);
+  }, [getContractsQuery.data]);
 
   const headers = dataFilter
     .filter((e) => {
       return [
         "Номер списка",
-        "Идентификатор",
-        "Наименование",
-        "ИНН организации",
-        "Тип организации",
+        "Номер договора",
+        "Дата",
+        "Поставщик",
+        "Получатель",
         "Статус",
+        "Сумма",
       ].includes(e.title);
     })
     .map((e) => e.title);
 
-  const rows = organizations.map((org: OrganizationScheme, index) => [
-    org.id, // Добавляем id в начало строки, но не отображаем его
+  const rows = contracts.map((contract: ContractsScheme, index) => [
+    contract.id, // Добавляем id в начало строки, но не отображаем его
     index + 1, // Номер списка
-    org.identificator, // Идентификатор
-    org.name, // Наименование
-    org.tax, // ИНН организации
-    org.orgType, // Тип организации
-    org.status, // Статус
+    "118", // Номер договора
+    contract.date, // Дата
+    contract.supplier, // Поставщик
+    contract.receiver, // Получатель
+    contract.sum,
+    contract.state, // Статус
   ]);
 
   interface SubModulesListScheme {
