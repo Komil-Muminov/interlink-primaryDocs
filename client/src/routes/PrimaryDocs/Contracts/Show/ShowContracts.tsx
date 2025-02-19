@@ -1,27 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { queryClient } from "../../../../API/hooks/queryClient";
 import { OrganizationScheme } from "../../../../API/services/organizations/OrganizationScheme";
 import { getOrganizationById } from "../../../../API/services/organizations/getOrganizationById";
 import PanelControl from "../../../../UI/Panel Control/PanelControl";
 import TitleSection from "../../../../UI/Title of Section/TitleSection";
-import Orgcard from "../../../../UI/Card of Organization/Orgcard/Orgcard";
-import Registry from "../../../../components/Registry/Registry";
+
 import "./ShowContracts.css";
 import OrganizationCard from "../../../../UI/Card/Organization Card/OrganizationCard";
 import UserCard from "../../../../UI/Card/User Card/UserCard";
 import { getOrganizations } from "../../../../API/services/organizations/getOrganizations";
 import { ContractsScheme } from "../../../../API/services/contracts/ContractsScheme";
 import { getContracts } from "../../../../API/services/contracts/getContracts";
-// import CardOrganization from "../../../UI/Card of Organization/CardOrganization";
-// import { getOrganizations } from "../../../API/services/organizations/getOrganizations";
-// import { dataFilter } from "../../../API/data/dataFilter";
-
-// import Mammoth from "mammoth";
 
 import { renderAsync } from "docx-preview";
 import { useScroll } from "../../../../API/hooks/useScroll";
+import { Button } from "@mui/material";
+import InputFile from "../../../../Components/File Service/File Service Input File/InputFile";
 
 const ShowContracts = () => {
   const { id: contractId } = useParams();
@@ -105,54 +101,33 @@ const ShowContracts = () => {
     }
   };
 
-  console.log(textOfDoc);
-
   const { setRefs, scrollTo } = useScroll();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       scrollTo("contacts");
     }, 100);
-    return () => clearTimeout(timer); // Очистка таймера
+    return () => clearTimeout(timer);
   }, []);
 
-  // PARSER MAMMOTH
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [numPages, setNumPages] = useState(1);
 
-  // const [textOfDoc, setTextOfDoc] = useState<string>("");
+  useEffect(() => {
+    if (containerRef.current) {
+      const totalHeight = containerRef.current.scrollHeight;
+      setNumPages(Math.ceil(totalHeight / 950));
+    }
+  }, [textOfDoc]);
 
-  // const handleFileUpload = async (event) => {
-  //   const file = event.target.files[0];
-  //   if (file && file.name.endsWith(".docx")) {
-  //     const reader = new FileReader();
-  //     reader.onload = async (e) => {
-  //       const arrayBuffer = e.target.result;
-  //       const result = await Mammoth.convertToHtml({
-  //         arrayBuffer,
-  //         styleMap: [
-  //           "p => p:fresh",
-  //           "strong => strong",
-  //           "em => em",
-  //           "u => u",
-  //           "h1 => h1",
-  //           "h2 => h2",
-  //           "h3 => h3",
-  //           "h4 => h4",
-  //           "h5 => h5",
-  //           "h6 => h6",
-  //           "p[style-name='Normal'] => p.normal",
-  //           "p[style-name='Heading 1'] => h1",
-  //           "p[style-name='Heading 2'] => h2",
-  //           "p[style-name='Heading 3'] => h3",
-  //           "p[style-name='Heading 4'] => h4",
-  //           "p[style-name='Heading 5'] => h5",
-  //           "p[style-name='Heading 6'] => h6",
-  //         ],
-  //       });
-  //       setTextOfDoc(result.value.replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")); // Заменяем табы
-  //     };
-  //     reader.readAsArrayBuffer(file);
-  //   }
-  // };
+  const nextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, numPages - 1));
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
+  };
 
   return (
     <main className="show-contracts">
@@ -160,16 +135,6 @@ const ShowContracts = () => {
       <PanelControl editButtonState={false} saveButtonState={true} />
       <TitleSection title="Карточка организации" />
       <section>
-        {/* <CardOrganization item={organizationsById} /> */}
-        {/* <Orgcard
-          data={organizationsById}
-          orgName="km"
-          orgType="bo"
-          orgInn="1123"
-          orglocation="испечак 2"
-          directorName="km"
-          headAccountantName="km"
-        /> */}
         <div className="contracts__docs-content">
           {/* <CardOrganization item={getOrgByTin} /> */}
           <OrganizationCard data={organizationsById} />
@@ -189,11 +154,41 @@ const ShowContracts = () => {
       </section>
       <TitleSection title="Договор" />
       <section ref={setRefs("contacts")} className="section">
-        <input type="file" onChange={handleFileUpload} accept=".docx" />
-        <div
-          dangerouslySetInnerHTML={{ __html: textOfDoc }}
-          className="text-of-doc"
-        />
+        <InputFile handleFileUpload={handleFileUpload} />
+        {/* <input type="file" onChange={handleFileUpload} accept=".docx" /> */}
+        {textOfDoc && (
+          <div className="doc-viewer">
+            <div className="doc-container" ref={containerRef}>
+              <div
+                className="doc-content"
+                style={{
+                  transform: `translateY(-${currentPage * 950}px)`,
+                }}
+                dangerouslySetInnerHTML={{ __html: textOfDoc }}
+              />
+            </div>
+            <div className="pagination-controls">
+              <Button
+                variant="contained"
+                onClick={prevPage}
+                disabled={currentPage === 0}
+              >
+                Назад
+              </Button>
+
+              <span>
+                Страница {currentPage + 1} из {numPages}
+              </span>
+              <Button
+                variant="contained"
+                onClick={nextPage}
+                disabled={currentPage === numPages - 1}
+              >
+                Вперёд
+              </Button>
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );

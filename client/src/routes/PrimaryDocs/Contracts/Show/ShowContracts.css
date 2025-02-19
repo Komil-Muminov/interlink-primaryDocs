@@ -55,6 +55,45 @@ section {
   width: 49%;
 }
 
+/* КАСТОМНЫЕ КЛАССЫ КОНТЕЙНЕРА ДЛЯ DOCX PREVIEW  */
+
+.doc-viewer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.doc-container {
+  width: 55.5% !important;
+  height: 950px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.doc-content {
+  transition: transform 0.5s ease;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  gap: 10px;
+}
+
+.pagination-controls button {
+  background-color: var(--primary-color);
+}
+
+/* КЛАССЫ БИБЛИОТЕКИ DOCX PREVIEW */
+
 .docx-wrapper {
   background-color: white !important; /* Убираем серый фон */
   display: flex;
@@ -64,8 +103,7 @@ section {
 .docx {
   background-color: white !important; /* Убираем серый фон внутри документа */
   box-shadow: none !important; /* Убираем возможную тень */
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   overflow: visible;
-  width: 60% !important;
   padding: 40px 70px !important;
 }
