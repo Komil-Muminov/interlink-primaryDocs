@@ -21,6 +21,7 @@ import { getContracts } from "../../../../API/services/contracts/getContracts";
 // import Mammoth from "mammoth";
 
 import { renderAsync } from "docx-preview";
+import { useScroll } from "../../../../API/hooks/useScroll";
 
 const ShowContracts = () => {
   const { id: contractId } = useParams();
@@ -106,6 +107,15 @@ const ShowContracts = () => {
 
   console.log(textOfDoc);
 
+  const { setRefs, scrollTo } = useScroll();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      scrollTo("contacts");
+    }, 100);
+    return () => clearTimeout(timer); // Очистка таймера
+  }, []);
+
   // PARSER MAMMOTH
 
   // const [textOfDoc, setTextOfDoc] = useState<string>("");
@@ -178,7 +188,7 @@ const ShowContracts = () => {
         </div>
       </section>
       <TitleSection title="Договор" />
-      <section className="section">
+      <section ref={setRefs("contacts")} className="section">
         <input type="file" onChange={handleFileUpload} accept=".docx" />
         <div
           dangerouslySetInnerHTML={{ __html: textOfDoc }}
