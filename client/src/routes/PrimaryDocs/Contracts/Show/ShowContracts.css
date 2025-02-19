@@ -54,3 +54,18 @@ section {
   gap: 25px;
   width: 49%;
 }
+
+.docx-wrapper {
+  background-color: white !important; /* Убираем серый фон */
+  display: flex;
+  justify-content: center;
+}
+
+.docx {
+  background-color: white !important; /* Убираем серый фон внутри документа */
+  box-shadow: none !important; /* Убираем возможную тень */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  width: 60% !important;
+  padding: 40px 70px !important;
+}
