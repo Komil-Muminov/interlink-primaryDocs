@@ -170,7 +170,7 @@ const CreateContracts = () => {
       <TitleSection title="Данные организации" />
       <section>
         <form
-          style={{ marginBottom: `${isValidInn ? "20px" : "0"}` }}
+          style={{ marginBottom: "20px" }}
           className="confirm-org-form"
           onSubmit={handleSubmit(handleCheckInnSubmit)}
         >
@@ -182,12 +182,12 @@ const CreateContracts = () => {
             borderRadiusStyle="30px"
             heightStyle="90%"
             widthStyle="85%"
-            disabled={isValidInn ? true : false}
+            // disabled={isValidInn ? true : false}
           />
           <Button
             type="submit"
             variant="contained"
-            disabled={isValidInn ? true : false}
+            // disabled={isValidInn ? true : false}
           >
             Получить данные
           </Button>

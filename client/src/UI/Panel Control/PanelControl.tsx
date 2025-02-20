@@ -73,7 +73,7 @@ const PanelControl = ({
           }}
           variant="text"
         >
-          <SaveIcon /> <p>Подтвердить</p>
+          <SaveIcon /> <p>Утвердить</p>
         </Button>
       </div>
     </div>

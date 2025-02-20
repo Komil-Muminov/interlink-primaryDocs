@@ -5,5 +5,6 @@ export interface ContractsScheme {
   receiver: string;
   date: string;
   sum: string;
-  state: string;
+  state: string | number;
+  htmlContent?: string;
 }

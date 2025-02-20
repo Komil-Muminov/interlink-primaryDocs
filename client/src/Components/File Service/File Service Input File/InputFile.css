@@ -11,9 +11,17 @@
   cursor: pointer;
 }
 
-.input-file:hover {
+.input-file-active:hover {
   background-color: #117fd915;
   border-color: #117fd9eb;
+}
+
+.input-file-disabled {
+  background-color: #e0e0e0;
+}
+
+.input-file-disabled:hover {
+  background-color: #e0e0e0;
 }
 
 .input-file__title {

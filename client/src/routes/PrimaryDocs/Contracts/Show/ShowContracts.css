@@ -80,12 +80,28 @@ section {
   transition: transform 0.5s ease;
 }
 
+.wrapper-doc-viewer-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 790px;
+}
+
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px 0;
   gap: 10px;
+}
+
+.panel-control-doc-viewer {
+  display: flex;
+  gap: 20px;
+}
+
+.panel-control-doc-viewer button {
+  background-color: var(--primary-color);
 }
 
 .pagination-controls button {

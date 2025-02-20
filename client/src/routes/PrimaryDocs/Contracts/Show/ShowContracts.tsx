@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { queryClient } from "../../../../API/hooks/queryClient";
@@ -18,6 +18,9 @@ import { renderAsync } from "docx-preview";
 import { useScroll } from "../../../../API/hooks/useScroll";
 import { Button } from "@mui/material";
 import InputFile from "../../../../Components/File Service/File Service Input File/InputFile";
+import { updateContractById } from "../../../../API/services/contracts/updateContractById";
+import { getContractById } from "../../../../API/services/contracts/getContractById";
+import FileList from "../../../../Components/File Service/File Service File List/FileList";
 
 const ShowContracts = () => {
   const { id: contractId } = useParams();
@@ -40,25 +43,25 @@ const ShowContracts = () => {
     }
   }, [getOrganizationsQuery.data]);
 
-  // GET CONTRACTS
+  // GET CONTRACT BY ID
 
-  const [contracts, setContracts] = useState<ContractsScheme[]>([]);
-
-  const getContractsQuery = useQuery(
+  const getContractByIdQuery = useQuery(
     {
-      queryFn: () => getContracts(),
-      queryKey: ["contracts"],
+      queryFn: () => getContractById(contractId ? contractId : 0),
+      queryKey: [`contracts-${contractId}`],
     },
     queryClient
   );
 
-  useEffect(() => {
-    if (getContractsQuery.status === "success") {
-      setContracts(getContractsQuery.data);
-    }
-  }, [getContractsQuery.data]);
+  const [contract, setContract] = useState<ContractsScheme | null>(null);
 
-  const contract = contracts.find((contract) => contract.id === contractId);
+  useEffect(() => {
+    if (getContractByIdQuery.status === "success") {
+      setContract(getContractByIdQuery.data);
+    } else if (getContractByIdQuery.status === "error") {
+      console.error(getContractByIdQuery.error);
+    }
+  }, [getContractByIdQuery]);
 
   const orgId = contract?.orgId;
 
@@ -81,6 +84,8 @@ const ShowContracts = () => {
     }
   }, [getOrganizationByIdQuery]);
 
+  console.log(contract);
+
   // PARSER DOCX-PREVIEW
 
   const [textOfDoc, setTextOfDoc] = useState<string>("");
@@ -101,14 +106,14 @@ const ShowContracts = () => {
     }
   };
 
+  const contractState =
+    typeof contract?.state === "string" && parseInt(contract.state) > 1;
+
   const { setRefs, scrollTo } = useScroll();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      scrollTo("contacts");
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!contractState) scrollTo("contracts");
+  }, [contract]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
@@ -119,7 +124,7 @@ const ShowContracts = () => {
       const totalHeight = containerRef.current.scrollHeight;
       setNumPages(Math.ceil(totalHeight / 950));
     }
-  }, [textOfDoc]);
+  }, [contract?.htmlContent ? contract?.htmlContent : textOfDoc]);
 
   const nextPage = () => {
     setCurrentPage((prev) => Math.min(prev + 1, numPages - 1));
@@ -128,6 +133,39 @@ const ShowContracts = () => {
   const prevPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
+
+  const handleRefreshFile = () => {
+    setTextOfDoc("");
+  };
+
+  const updateContractByIdMutate = useMutation<any, Error>({
+    mutationFn: (data) => updateContractById(data),
+    onSuccess: () => {
+      // const contractId = variables.get("id");
+      queryClient.invalidateQueries({ queryKey: [`contracts-${contractId}`] });
+      // navigate(`/primary-docs/contracts/show/${contractId}`);
+    },
+    onError: (error) => {
+      console.error("Ошибка при обновлении договора:", error.message);
+    },
+  });
+
+  const handleUpdateData = () => {
+    updateContractByIdMutate.mutate({
+      contractId: contractId,
+      htmlContent: textOfDoc,
+    });
+  };
+
+  const showContract = contract?.htmlContent
+    ? contract?.htmlContent
+    : textOfDoc;
+
+  console.log(contractState);
+
+  useEffect(() => {
+    if (!contractState) scrollTo("docViewer");
+  }, [showContract]);
 
   return (
     <main className="show-contracts">
@@ -153,10 +191,18 @@ const ShowContracts = () => {
         </div>
       </section>
       <TitleSection title="Договор" />
-      <section ref={setRefs("contacts")} className="section">
-        <InputFile handleFileUpload={handleFileUpload} />
+      <section ref={setRefs("contracts")} className="section">
+        {contract?.htmlContent ? (
+          <FileList />
+        ) : (
+          <InputFile
+            disabled={contract?.htmlContent ? true : false}
+            handleFileUpload={handleFileUpload}
+          />
+        )}
+
         {/* <input type="file" onChange={handleFileUpload} accept=".docx" /> */}
-        {textOfDoc && (
+        {showContract && (
           <div className="doc-viewer">
             <div className="doc-container" ref={containerRef}>
               <div
@@ -164,32 +210,56 @@ const ShowContracts = () => {
                 style={{
                   transform: `translateY(-${currentPage * 950}px)`,
                 }}
-                dangerouslySetInnerHTML={{ __html: textOfDoc }}
+                dangerouslySetInnerHTML={{ __html: showContract }}
               />
             </div>
-            <div className="pagination-controls">
-              <Button
-                variant="contained"
-                onClick={prevPage}
-                disabled={currentPage === 0}
-              >
-                Назад
-              </Button>
+            <div className="wrapper-doc-viewer-buttons">
+              <div className="panel-control-doc-viewer">
+                <Button
+                  disabled={contract?.htmlContent ? true : false}
+                  onClick={handleUpdateData}
+                  variant="contained"
+                >
+                  Подтвердить
+                </Button>
+                <Button
+                  disabled={contract?.htmlContent ? true : false}
+                  onClick={handleRefreshFile}
+                  variant="contained"
+                >
+                  Удалить файл
+                </Button>
+              </div>
+              <div ref={setRefs("docViewer")} className="pagination-controls">
+                <Button
+                  variant="contained"
+                  onClick={prevPage}
+                  disabled={currentPage === 0}
+                >
+                  Назад
+                </Button>
 
-              <span>
-                Страница {currentPage + 1} из {numPages}
-              </span>
-              <Button
-                variant="contained"
-                onClick={nextPage}
-                disabled={currentPage === numPages - 1}
-              >
-                Вперёд
-              </Button>
+                <span>
+                  Страница {currentPage + 1} из {numPages}
+                </span>
+                <Button
+                  variant="contained"
+                  onClick={nextPage}
+                  disabled={currentPage === numPages - 1}
+                >
+                  Вперёд
+                </Button>
+              </div>
             </div>
           </div>
         )}
       </section>
+      {contractState && (
+        <>
+          <TitleSection title="Соглосование" />
+          <section></section>
+        </>
+      )}
     </main>
   );
 };
