@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "files": [],
+    "id": "de994777-50dc-48fc-9c3c-4ac725f4a221",
+    "orgId": "2f489e82-da6d-4483-8248-ba0b93a60db9",
+    "supplier": "ГУП \"Центр финансовых информационных технологий\"",
+    "receiver": "Агентство ценных бумаг",
+    "date": "2025-02-20",
+    "sum": "0",
+    "state": "2",
+    "htmlContent": "D:\\Frontend\\Interlink\\Первичные документы\\primaryDocs\\server\\uploads\\contracts\\de994777-50dc-48fc-9c3c-4ac725f4a221\\htmlContent-de994777-50dc-48fc-9c3c-4ac725f4a221.html"
+  }
+]
