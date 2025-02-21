@@ -1,0 +1,182 @@
+<!--docxjs library predefined styles--><style>
+.docx-wrapper { background: gray; padding: 30px; padding-bottom: 0px; display: flex; flex-flow: column; align-items: center; } 
+.docx-wrapper>section.docx { background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 30px; }
+.docx { color: black; hyphens: auto; text-underline-position: from-font; }
+section.docx { box-sizing: border-box; display: flex; flex-flow: column nowrap; position: relative; overflow: hidden; }
+section.docx>article { margin-bottom: auto; z-index: 1; }
+section.docx>footer { z-index: 1; }
+.docx table { border-collapse: collapse; }
+.docx table td, .docx table th { vertical-align: top; }
+.docx p { margin: 0pt; min-height: 1em; }
+.docx span { white-space: pre-wrap; overflow-wrap: break-word; }
+.docx a { color: inherit; text-decoration: inherit; }
+.docx svg { fill: transparent; }
+</style><!--docxjs document theme values--><style>.docx {
+  --docx-majorHAnsi-font: Calibri Light;
+  --docx-minorHAnsi-font: Calibri;
+  --docx-dk1-color: #000000;
+  --docx-lt1-color: #FFFFFF;
+  --docx-dk2-color: #44546A;
+  --docx-lt2-color: #E7E6E6;
+  --docx-accent1-color: #4472C4;
+  --docx-accent2-color: #ED7D31;
+  --docx-accent3-color: #A5A5A5;
+  --docx-accent4-color: #FFC000;
+  --docx-accent5-color: #5B9BD5;
+  --docx-accent6-color: #70AD47;
+  --docx-hlink-color: #0563C1;
+  --docx-folHlink-color: #954F72;
+}
+</style><!--docxjs document styles--><style>.docx span {
+  font-family: var(--docx-minorHAnsi-font);
+  min-height: 11.00pt;
+  font-size: 11.00pt;
+}
+.docx p {
+  margin-bottom: 8.00pt;
+  line-height: 1.08;
+}
+.docx table, table.docx_a1 td {
+  padding-top: 0.00pt;
+  padding-left: 5.40pt;
+  padding-bottom: 0.00pt;
+  padding-right: 5.40pt;
+}
+p.docx_a3 {
+  margin-left: 36.00pt;
+}
+span.docx_a4 {
+  color: #0563C1;
+  text-decoration: underline;
+}
+span.docx_a5 {
+  color: #605E5C;
+  background-color: #E1DFDD;
+}
+</style><!--docxjs document numbering styles--><style>p.docx-num-1-0:before {
+  content: ""counter(docx-num-1-0, decimal)".\9";
+  counter-increment: docx-num-1-0;
+}
+p.docx-num-1-0 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 36.00pt;
+}
+p.docx-num-1-0 {
+  counter-reset: docx-num-1-1 0;
+}
+p.docx-num-1-1:before {
+  content: ""counter(docx-num-1-1, lower-alpha)".\9";
+  counter-increment: docx-num-1-1;
+}
+p.docx-num-1-1 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 72.00pt;
+}
+p.docx-num-1-1 {
+  counter-reset: docx-num-1-2 0;
+}
+p.docx-num-1-2:before {
+  content: ""counter(docx-num-1-2, lower-roman)".\9";
+  counter-increment: docx-num-1-2;
+}
+p.docx-num-1-2 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -9.00pt;
+  margin-left: 108.00pt;
+}
+p.docx-num-1-2 {
+  counter-reset: docx-num-1-3 0;
+}
+p.docx-num-1-3:before {
+  content: ""counter(docx-num-1-3, decimal)".\9";
+  counter-increment: docx-num-1-3;
+}
+p.docx-num-1-3 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 144.00pt;
+}
+p.docx-num-1-3 {
+  counter-reset: docx-num-1-4 0;
+}
+p.docx-num-1-4:before {
+  content: ""counter(docx-num-1-4, lower-alpha)".\9";
+  counter-increment: docx-num-1-4;
+}
+p.docx-num-1-4 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 180.00pt;
+}
+p.docx-num-1-4 {
+  counter-reset: docx-num-1-5 0;
+}
+p.docx-num-1-5:before {
+  content: ""counter(docx-num-1-5, lower-roman)".\9";
+  counter-increment: docx-num-1-5;
+}
+p.docx-num-1-5 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -9.00pt;
+  margin-left: 216.00pt;
+}
+p.docx-num-1-5 {
+  counter-reset: docx-num-1-6 0;
+}
+p.docx-num-1-6:before {
+  content: ""counter(docx-num-1-6, decimal)".\9";
+  counter-increment: docx-num-1-6;
+}
+p.docx-num-1-6 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 252.00pt;
+}
+p.docx-num-1-6 {
+  counter-reset: docx-num-1-7 0;
+}
+p.docx-num-1-7:before {
+  content: ""counter(docx-num-1-7, lower-alpha)".\9";
+  counter-increment: docx-num-1-7;
+}
+p.docx-num-1-7 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 288.00pt;
+}
+p.docx-num-1-7 {
+  counter-reset: docx-num-1-8 0;
+}
+p.docx-num-1-8:before {
+  content: ""counter(docx-num-1-8, lower-roman)".\9";
+  counter-increment: docx-num-1-8;
+}
+p.docx-num-1-8 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -9.00pt;
+  margin-left: 324.00pt;
+}
+.docx-wrapper {
+  counter-reset: docx-num-1-0 0 docx-num-1-1 0 docx-num-1-2 0 docx-num-1-3 0 docx-num-1-4 0 docx-num-1-5 0 docx-num-1-6 0 docx-num-1-7 0 docx-num-1-8 0;
+}
+</style><div class="docx-wrapper"><section class="docx" style="padding: 56.7pt 42.5pt 56.7pt 85.05pt; width: 595.3pt; min-height: 841.9pt;"><article><p class="docx_a3 docx-num-1-0"><span>Нужно исправить данные из «Телефон горячие линии» и «Электронный адрес» в шапке из </span><span lang="en-US">Egov</span><span> </span><span lang="en-US">Portal</span><span> </span><span lang="en-US">Vercel</span><span> </span><span lang="en-US">App</span><span> </span><span>на рабочий из</span><span> </span><span lang="en-US">Emoliya</span><span> (</span><span lang="en-US">prod</span><span>).</span></p><p><span style="font-style: italic;">Рисунок №1. Данные из шапки  </span><a href="https://egov-portal.vercel.app/"><span class="docx_a4" style="font-style: italic;">https://egov-portal.vercel.app/</span></a></p><p><span><div style="display: inline-block; position: relative; text-indent: 0px; width: 467.75pt; height: 60.95pt;"><img src="blob:http://localhost:5173/3ad2b95b-a864-4c0d-9440-d46ada71400b" style="position: relative; left: 0pt; top: 0pt; width: 467.75pt; height: 60.95pt;"></div></span></p><p><span style="font-style: italic;">Рисунок №</span><span style="font-style: italic;">2</span><span style="font-style: italic;">. Данные из шапки </span><a href="https://emoliya.tj/"><span class="docx_a4" style="font-style: italic;">https://emoliya.tj/</span></a></p><p><span><div style="display: inline-block; position: relative; text-indent: 0px; width: 467.75pt; height: 62.6pt;"><img src="blob:http://localhost:5173/2f0e5178-fa4f-46f7-a7e0-3a760c16029f" style="position: relative; left: 0pt; top: 0pt; width: 467.75pt; height: 62.6pt;"></div></span></p><p class="docx_a3 docx-num-1-0"><span>После открытия доступа к </span><span>Interlink</span><span> извне, необходимо добавить функционал регистрации пользователей через номер телефона, аналогичный реализованному на сайте </span><a href="https://emoliya.tj/"><span class="docx_a4">https://emoliya.tj/</span></a><span>.</span></p><p class="docx_a3 docx-num-1-0"><span>В модуле CRM необходимо добавить в карточку организации новые поля: «Республиканский бюджет» и «Местный бюджет». Также требуется реализовать возможность фильтрации организаций по значениям этих полей.</span></p><p><span style="font-style: italic;">Рисунок №</span><span style="font-style: italic;">3</span><span style="font-style: italic;">. </span><span style="font-style: italic;">Поля </span><span style="font-style: italic;">«Республиканский бюджет» и «Местный бюджет» </span><span style="font-style: italic;">в карточке организации.</span></p><p><span id="_GoBack"></span><span><div style="display: inline-block; position: relative; text-indent: 0px; width: 467.75pt; height: 154pt;"><img src="blob:http://localhost:5173/a2984f10-8fb7-41f8-ba97-a1123b4d86a4" style="position: relative; left: 0pt; top: 0pt; width: 467.75pt; height: 154pt;"></div></span></p></article></section></div>
