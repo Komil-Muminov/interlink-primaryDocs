@@ -22,6 +22,8 @@ import { updateContractById } from "../../../../API/services/contracts/updateCon
 import { getContractById } from "../../../../API/services/contracts/getContractById";
 import FileList from "../../../../Components/File Service/File Service File List/FileList";
 
+import qrcode from "../../../../assets/qrcode.svg";
+
 const ShowContracts = () => {
   const { id: contractId } = useParams();
 
@@ -88,7 +90,42 @@ const ShowContracts = () => {
 
   // PARSER DOCX-PREVIEW
 
+  const [originalHTML, setOriginalHTML] = useState<string>("");
   const [textOfDoc, setTextOfDoc] = useState<string>("");
+
+  const firstState =
+    typeof contract?.state === "string" && parseInt(contract.state) > 1;
+
+  const confirmationState =
+    typeof contract?.state === "string" && parseInt(contract.state) === 2;
+
+  const approvalState =
+    typeof contract?.state === "string" && parseInt(contract.state) > 2;
+
+  const affirmationHTML = `
+    <div class="wrapper-last-page" padding: 40px;">
+      <div class="affirmation-document" style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="wrapper-qr-affirmation" style="display: flex; gap: 20px; align-items: center;">
+          <div class="qr-code" style="width: 20%; height: 16.6%; border: 1px solid #ccc; overflow: hidden; border-radius: 10px;">
+            <img src=${qrcode} alt="" style="width: 100%;" />
+          </div>
+          <div class="affirmation-content" style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="date-of-issue" style="display: flex; flex-direction: column; gap: 2px;">
+              <p>Дата выдачи документа</p>
+              <p style="font-weight: bold;">21.02.2025</p>
+            </div>
+            <div class="number-of-document" style="display: flex; flex-direction: column; gap: 2px;">
+              <p>Номер документа в реестре</p>
+              <p style="font-weight: bold;">С-124</p>
+            </div>
+          </div>
+        </div>
+        <div class="affirmation-seal" style="border: 2px dashed #607d8b; display: flex; justify-content: center; padding: 10px; border-radius: 10px;">
+          <p style="font-size: 20px; color: #607d8b; font-weight: 600;">УТВЕРЖДЕНО</p>
+        </div>
+      </div>
+    </div>
+  `;
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -98,21 +135,36 @@ const ShowContracts = () => {
       const reader = new FileReader();
       reader.onload = async (e) => {
         const arrayBuffer = e.target?.result as ArrayBuffer;
-        const container = document.createElement("div"); // Временный контейнер для рендера
+        const container = document.createElement("div");
         await renderAsync(arrayBuffer, container);
-        setTextOfDoc(container.innerHTML); // Записываем сгенерированный HTML
+        // Сохраняем исходный HTML
+        const generatedHTML = container.innerHTML;
+        setOriginalHTML(generatedHTML);
+        // Если approvalState уже true – сразу комбинируем
+        if (approvalState) {
+          setTextOfDoc(generatedHTML + affirmationHTML);
+        } else {
+          setTextOfDoc(generatedHTML);
+        }
       };
       reader.readAsArrayBuffer(file);
     }
   };
 
-  const contractState =
-    typeof contract?.state === "string" && parseInt(contract.state) > 1;
+  useEffect(() => {
+    if (originalHTML) {
+      if (approvalState) {
+        setTextOfDoc(originalHTML + affirmationHTML);
+      } else {
+        setTextOfDoc(originalHTML);
+      }
+    }
+  }, [approvalState, originalHTML]);
 
   const { setRefs, scrollTo } = useScroll();
 
   useEffect(() => {
-    if (!contractState) scrollTo("contracts");
+    if (!firstState) scrollTo("contracts");
   }, [contract]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -134,6 +186,8 @@ const ShowContracts = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
 
+  console.log(currentPage);
+
   const handleRefreshFile = () => {
     setTextOfDoc("");
   };
@@ -150,27 +204,40 @@ const ShowContracts = () => {
     },
   });
 
+  const showContract =
+    (contract?.htmlContent || textOfDoc) +
+    (approvalState ? affirmationHTML : "");
+
   const handleUpdateData = () => {
     updateContractByIdMutate.mutate({
       contractId: contractId,
-      htmlContent: textOfDoc,
+      htmlContent: showContract,
     });
   };
 
-  const showContract = contract?.htmlContent
-    ? contract?.htmlContent
-    : textOfDoc;
-
-  console.log(contractState);
+  console.log(showContract);
 
   useEffect(() => {
-    if (!contractState) scrollTo("docViewer");
+    if (!firstState) scrollTo("docViewer");
   }, [showContract]);
+
+  console.log(confirmationState, approvalState);
+
+  console.log(numPages);
 
   return (
     <main className="show-contracts">
       <TitleSection title={organizationsById ? organizationsById?.name : ""} />
-      <PanelControl editButtonState={false} saveButtonState={true} />
+      <PanelControl
+        editButtonState={false}
+        saveButtonState={
+          confirmationState ? false : approvalState ? true : true
+        }
+        handleApproval={handleUpdateData}
+        scrollTo={scrollTo}
+        setCurrentPage={setCurrentPage}
+        lastPages={numPages}
+      />
       <TitleSection title="Карточка организации" />
       <section>
         <div className="contracts__docs-content">
@@ -204,7 +271,11 @@ const ShowContracts = () => {
         {/* <input type="file" onChange={handleFileUpload} accept=".docx" /> */}
         {showContract && (
           <div className="doc-viewer">
-            <div className="doc-container" ref={containerRef}>
+            <div
+              className="doc-container"
+              ref={containerRef}
+              style={{ position: "relative" }}
+            >
               <div
                 className="doc-content"
                 style={{
@@ -216,14 +287,14 @@ const ShowContracts = () => {
             <div className="wrapper-doc-viewer-buttons">
               <div className="panel-control-doc-viewer">
                 <Button
-                  disabled={contract?.htmlContent ? true : false}
+                  disabled={confirmationState || approvalState}
                   onClick={handleUpdateData}
                   variant="contained"
                 >
                   Подтвердить
                 </Button>
                 <Button
-                  disabled={contract?.htmlContent ? true : false}
+                  disabled={confirmationState || approvalState}
                   onClick={handleRefreshFile}
                   variant="contained"
                 >
@@ -254,12 +325,6 @@ const ShowContracts = () => {
           </div>
         )}
       </section>
-      {contractState && (
-        <>
-          <TitleSection title="Соглосование" />
-          <section></section>
-        </>
-      )}
     </main>
   );
 };

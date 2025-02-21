@@ -8,14 +8,22 @@ import { useNavigate } from "react-router";
 
 interface TProps {
   handleSubmit?: React.MouseEventHandler;
+  handleApproval?: any;
   editButtonState?: boolean;
   saveButtonState: boolean;
+  scrollTo: any;
+  setCurrentPage: any;
+  lastPages: number;
 }
 
 const PanelControl = ({
   // editButtonState,
   handleSubmit,
+  handleApproval,
   saveButtonState,
+  scrollTo,
+  setCurrentPage,
+  lastPages,
 }: TProps) => {
   const navigate = useNavigate();
 
@@ -63,7 +71,11 @@ const PanelControl = ({
         </Button>
         <Button
           disabled={saveButtonState}
-          // onClick={handleSubmit}
+          onClick={() => {
+            handleApproval();
+            scrollTo("contracts");
+            setCurrentPage(lastPages - 1);
+          }}
           type="submit"
           sx={{
             display: "flex",
