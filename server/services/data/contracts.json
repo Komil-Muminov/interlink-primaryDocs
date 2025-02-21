@@ -7,6 +7,28 @@
     "receiver": "Агентство ценных бумаг",
     "date": "2025-02-21",
     "sum": "0",
+    "state": "3",
+    "htmlContent": "D:\\Frontend\\Interlink\\Первичные документы\\primaryDocs\\server\\uploads\\contracts\\f8dff50d-b9ef-493d-853f-897fba8fec3c\\htmlContent-f8dff50d-b9ef-493d-853f-897fba8fec3c.html"
+  },
+  {
+    "files": [],
+    "id": "816e82fd-1a82-4583-a9ac-b74b6bae6b23",
+    "orgId": "183b9d28-3b18-4ccf-933a-8dd40c49ead8",
+    "supplier": "ГУП \"Центр финансовых информационных технологий\"",
+    "receiver": "222",
+    "date": "2025-02-21",
+    "sum": "0",
     "state": "1"
+  },
+  {
+    "files": [],
+    "id": "af02a3fc-c42b-472c-941b-8a305c596008",
+    "orgId": "911de932-0d8a-488b-abd8-7f9859596e50",
+    "supplier": "ГУП \"Центр финансовых информационных технологий\"",
+    "receiver": "c234",
+    "date": "2025-02-21",
+    "sum": "0",
+    "state": "2",
+    "htmlContent": "D:\\Frontend\\Interlink\\Первичные документы\\primaryDocs\\server\\uploads\\contracts\\af02a3fc-c42b-472c-941b-8a305c596008\\htmlContent-af02a3fc-c42b-472c-941b-8a305c596008.html"
   }
 ]
