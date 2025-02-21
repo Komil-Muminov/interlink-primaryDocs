@@ -18,6 +18,7 @@ import { useScroll } from "../../../../API/hooks/useScroll";
 import "./CreateContracts.css";
 import { createContract } from "../../../../API/services/contracts/createContract";
 import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
+import MoreOrgInfo from "../../../../Components/More info about organization/MoreOrgInfo";
 
 // import { generateUniqueId } from "../../../../API/hooks/generateUniqueId";
 // import FindInPageIcon from "@mui/icons-material/FindInPage";
@@ -159,6 +160,14 @@ const CreateContracts = () => {
     scrollTo("contracts");
   }, [isValidInn]);
 
+  const [moreOrgInfo, setMoreOrgInfo] = useState<boolean>(false);
+
+  const handleClick = (state: boolean, target: string) => {
+    if (target === "moreOrgInfo") {
+      setMoreOrgInfo(state);
+    }
+  };
+
   return (
     <main className="contracts create-contracts">
       <TitleSection title="Новый договор" />
@@ -169,34 +178,44 @@ const CreateContracts = () => {
       />
       <TitleSection title="Данные организации" />
       <section>
-        <form
-          style={{ marginBottom: "20px" }}
-          className="confirm-org-form"
-          onSubmit={handleSubmit(handleCheckInnSubmit)}
-        >
-          <Input
-            register={register}
-            classname="crtPrimaryDocs__form--isDataSuccess"
-            idValue="tax"
-            labelValue="ИНН *"
-            borderRadiusStyle="30px"
-            heightStyle="90%"
-            widthStyle="85%"
-            // disabled={isValidInn ? true : false}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            // disabled={isValidInn ? true : false}
+        {moreOrgInfo && (
+          <MoreOrgInfo data={getOrgByTin} handleClick={handleClick} />
+        )}
+        {!moreOrgInfo && (
+          <form
+            style={{ marginBottom: "20px" }}
+            className="confirm-org-form"
+            onSubmit={handleSubmit(handleCheckInnSubmit)}
           >
-            Получить данные
-          </Button>
-        </form>
-        {isValidInn && (
+            <Input
+              register={register}
+              classname="crtPrimaryDocs__form--isDataSuccess"
+              idValue="tax"
+              labelValue="ИНН *"
+              borderRadiusStyle="30px"
+              heightStyle="90%"
+              widthStyle="85%"
+              // disabled={isValidInn ? true : false}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              // disabled={isValidInn ? true : false}
+            >
+              Получить данные
+            </Button>
+          </form>
+        )}
+
+        {isValidInn && !moreOrgInfo && (
           <>
             <div ref={setRefs("contracts")} className="contracts__docs-content">
               {/* <CardOrganization item={getOrgByTin} /> */}
-              <OrganizationCard data={getOrgByTin} />
+              <OrganizationCard
+                data={getOrgByTin}
+                handleClick={handleClick}
+                target="moreOrgInfo"
+              />
               <div className="contracts__docs-ucard">
                 <UserCard
                   id="1"

@@ -4,6 +4,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
 
 interface FileListProps {
   item?: File;
@@ -26,6 +27,9 @@ const FileList = ({ item, onDelete }: FileListProps) => {
           {item ? item.name : "Документ.docx"}
         </p>
       </div>
+      <IconButton>
+        <DownloadIcon />
+      </IconButton>
       {item && (
         <IconButton onClick={onDelete}>
           <DeleteIcon />

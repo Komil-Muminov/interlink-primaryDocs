@@ -1,7 +1,8 @@
-import "./OrganizationCard.css";
+import React from "react";
+import "./MoreOrgInfo.css";
 
-import tjLogo from "../../../assets/tj-logo-img.jpg";
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
+
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import CorporateFareOutlinedIcon from "@mui/icons-material/CorporateFareOutlined";
 import Grid3x3OutlinedIcon from "@mui/icons-material/Grid3x3Outlined";
@@ -9,27 +10,21 @@ import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import TerrainOutlinedIcon from "@mui/icons-material/TerrainOutlined";
 import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
-import { OrganizationScheme } from "../../../API/services/organizations/OrganizationScheme";
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined";
+import DatasetOutlinedIcon from "@mui/icons-material/DatasetOutlined";
 
-interface TProps {
-  data: OrganizationScheme;
-  handleClick: (state: boolean) => void;
-  target?: string;
-}
-
-const OrganizationCard = ({ data, handleClick, target }: TProps) => {
+const MoreOrgInfo = ({ handleClick, data }: any) => {
   return (
-    <div className="organization-card">
-      <div className="wrapper-image"></div>
-      <div className="content">
-        <div className="wrapper-info">
-          <ul className="info-list">
-            <li>
-              <CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
-              <p>
-                Наименование организации: <span>{data?.name}</span>
-              </p>
-            </li>
+    <div className="more-wrapper-info">
+      <div className="info-navigate">
+        <IconButton onClick={() => handleClick(false, "moreOrgInfo")}>
+          <ArrowCircleLeftOutlinedIcon sx={{ fontSize: "35px" }} />
+        </IconButton>
+        <p className="title">{data?.name}</p>
+      </div>
+      <ul className="info-list">
+        <li>
+          <ul className="more-info-list">
             <li>
               <CorporateFareOutlinedIcon sx={{ color: "#313131" }} />
               <p>
@@ -54,6 +49,10 @@ const OrganizationCard = ({ data, handleClick, target }: TProps) => {
                 Номер договора: <span>{data?.docNo}</span>
               </p>
             </li>
+          </ul>
+        </li>
+        <li>
+          <ul className="more-info-list">
             <li>
               <CalendarMonthOutlinedIcon sx={{ color: "#313131" }} />
               <p>
@@ -72,45 +71,51 @@ const OrganizationCard = ({ data, handleClick, target }: TProps) => {
                 Код территории: <span>{data?.terCode}</span>
               </p>
             </li>
-            {/* <li>
-              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>Единица учета: </p>
-            </li>
             <li>
               <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>ГРБС (Ответственный): </p>
+              <p>
+                Единица учета: <span>{data?.unitAccountingTer}</span>
+              </p>
             </li>
-            <li>
-              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>ГРБС: </p>
-            </li>
-            <li>
-              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>ПБС: </p>
-            </li>
-            <li>
-              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>Бюджетные заявки: </p>
-            </li>
-            <li>
-              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
-              <p>Реквизиты: </p>
-            </li> */}
           </ul>
-        </div>
-        <div className="panel-control">
-          <Button
-            onClick={() => handleClick(true, target)}
-            variant="contained"
-            sx={{}}
-          >
-            Подробнее
-          </Button>
-          <Button variant="contained">Структура</Button>
-        </div>
-      </div>
+        </li>
+        <li>
+          <ul className="more-info-list">
+            <li>
+              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
+              <p>
+                ГРБС (Ответственный): <span>{data?.grbsResonsible}</span>
+              </p>
+            </li>
+            <li>
+              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
+              <p>
+                ГРБС: <span>{data?.grbs}</span>
+              </p>
+            </li>
+            <li>
+              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
+              <p>
+                ПБС: <span>{data?.pbs}</span>
+              </p>
+            </li>
+            <li>
+              <DatasetOutlinedIcon sx={{ color: "#313131" }} />
+              <p>
+                Бюджетные заявки: <span>{data?.bz}</span>
+              </p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <DatasetOutlinedIcon sx={{ color: "#313131" }} />
+          <p>
+            Реквизиты: <span>{data?.details}</span>
+          </p>
+        </li>
+      </ul>
     </div>
   );
 };
 
-export default OrganizationCard;
+export default MoreOrgInfo;

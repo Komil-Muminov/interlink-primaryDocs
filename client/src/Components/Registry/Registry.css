@@ -60,22 +60,36 @@ table.registry {
   border-right: 1px solid #d8d8d8; /* Добавляем правую границу для последней ячейки */
 }
 
-.active-status,
-.inactive-status {
+.status-preparation,
+.status-affirmation,
+.status-completed,
+.status-deleted {
   padding: 10px;
   border-radius: 15px;
   text-align: center;
-  font-weight: 500;
+  font-weight: 700;
   width: 100%;
 }
 
-.active-status {
+.status-preparation {
+  background-color: #e5f5ff;
+  border: 2px solid #669bba;
+  color: #669bba;
+}
+
+.status-affirmation {
+  background-color: #fff6ea;
+  border: 2px solid #ba9566;
+  color: #ba9566;
+}
+
+.status-completed {
   background-color: #eafff3;
   border: 2px solid #66ba87;
   color: #63b885;
 }
 
-.inactive-status {
+.status-deleted {
   background-color: #ffeaea;
   border: 2px solid #b96363;
   color: #ba6565;

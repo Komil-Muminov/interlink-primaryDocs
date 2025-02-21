@@ -23,6 +23,7 @@ import { getContractById } from "../../../../API/services/contracts/getContractB
 import FileList from "../../../../Components/File Service/File Service File List/FileList";
 
 import qrcode from "../../../../assets/qrcode.svg";
+import MoreOrgInfo from "../../../../Components/More info about organization/MoreOrgInfo";
 
 const ShowContracts = () => {
   const { id: contractId } = useParams();
@@ -221,9 +222,13 @@ const ShowContracts = () => {
     if (!firstState) scrollTo("docViewer");
   }, [showContract]);
 
-  console.log(confirmationState, approvalState);
+  const [moreOrgInfo, setMoreOrgInfo] = useState<boolean>(false);
 
-  console.log(numPages);
+  const handleClick = (state: boolean, target: string) => {
+    if (target === "moreOrgInfo") {
+      setMoreOrgInfo(state);
+    }
+  };
 
   return (
     <main className="show-contracts">
@@ -240,22 +245,31 @@ const ShowContracts = () => {
       />
       <TitleSection title="Карточка организации" />
       <section>
-        <div className="contracts__docs-content">
-          {/* <CardOrganization item={getOrgByTin} /> */}
-          <OrganizationCard data={organizationsById} />
-          <div className="contracts__docs-ucard">
-            <UserCard
-              id="1"
-              fullname="Рохбар Рохбаров"
-              position="Руководитель"
+        {moreOrgInfo && (
+          <MoreOrgInfo data={organizationsById} handleClick={handleClick} />
+        )}
+        {!moreOrgInfo && (
+          <div className="contracts__docs-content">
+            {/* <CardOrganization item={getOrgByTin} /> */}
+            <OrganizationCard
+              data={organizationsById}
+              handleClick={handleClick}
+              target="moreOrgInfo"
             />
-            <UserCard
-              id="2"
-              fullname="Сармухосиб Сармухосибев"
-              position="Бухгалтер"
-            />
+            <div className="contracts__docs-ucard">
+              <UserCard
+                id="1"
+                fullname="Рохбар Рохбаров"
+                position="Руководитель"
+              />
+              <UserCard
+                id="2"
+                fullname="Сармухосиб Сармухосибев"
+                position="Бухгалтер"
+              />
+            </div>
           </div>
-        </div>
+        )}
       </section>
       <TitleSection title="Договор" />
       <section ref={setRefs("contracts")} className="section">
@@ -291,7 +305,7 @@ const ShowContracts = () => {
                   onClick={handleUpdateData}
                   variant="contained"
                 >
-                  Подтвердить
+                  Подготовить
                 </Button>
                 <Button
                   disabled={confirmationState || approvalState}

@@ -12,6 +12,7 @@ import "./Contracts.css";
 import NavigationSubmodules from "../../../UI/Navigation of Modules/NavigationOfModules";
 import { ContractsScheme } from "../../../API/services/contracts/ContractsScheme";
 import { getContracts } from "../../../API/services/contracts/getContracts";
+import { Button } from "@mui/material";
 
 const Contracts: React.FC = () => {
   const [contracts, setContracts] = useState<ContractsScheme[]>([]);
@@ -38,8 +39,8 @@ const Contracts: React.FC = () => {
         "Дата",
         "Поставщик",
         "Получатель",
-        "Статус",
         "Сумма",
+        "Статус",
       ].includes(e.title);
     })
     .map((e) => e.title);
@@ -51,8 +52,8 @@ const Contracts: React.FC = () => {
     contract.date, // Дата
     contract.supplier, // Поставщик
     contract.receiver, // Получатель
-    contract.sum,
     contract.state, // Статус
+    contract.sum,
   ]);
 
   interface SubModulesListScheme {
@@ -102,16 +103,17 @@ const Contracts: React.FC = () => {
         <div className="panel-control-filter">
           <Filter data={dataFilter} />
           <Link to="create">
-            <button>Добавить</button>
+            <Button
+              variant="contained"
+              sx={{ fontSize: "16px", maxHeight: "51px" }}
+            >
+              Добавить
+            </Button>
           </Link>
         </div>
       </section>
       <section>
-        <Registry
-          headersProps={headers}
-          rowsProps={rows}
-          status={{ active: "Активный", inactive: "Неактивный" }}
-        />
+        <Registry headersProps={headers} rowsProps={rows} />
       </section>
     </main>
   );
