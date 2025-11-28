@@ -31,7 +31,7 @@ const Header: React.FC = () => {
   };
 
   // DefName
-  const defName = "Норов Махмуд";
+  const defName = "Аминов Шахром";
   return (
     <>
       <header>

@@ -1,0 +1,247 @@
+<!--docxjs library predefined styles--><style>
+.docx-wrapper { background: gray; padding: 30px; padding-bottom: 0px; display: flex; flex-flow: column; align-items: center; } 
+.docx-wrapper>section.docx { background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 30px; }
+.docx { color: black; hyphens: auto; text-underline-position: from-font; }
+section.docx { box-sizing: border-box; display: flex; flex-flow: column nowrap; position: relative; overflow: hidden; }
+section.docx>article { margin-bottom: auto; z-index: 1; }
+section.docx>footer { z-index: 1; }
+.docx table { border-collapse: collapse; }
+.docx table td, .docx table th { vertical-align: top; }
+.docx p { margin: 0pt; min-height: 1em; }
+.docx span { white-space: pre-wrap; overflow-wrap: break-word; }
+.docx a { color: inherit; text-decoration: inherit; }
+.docx svg { fill: transparent; }
+</style><!--docxjs document theme values--><style>.docx {
+  --docx-majorHAnsi-font: Calibri;
+  --docx-minorHAnsi-font: Cambria;
+  --docx-dk1-color: #000000;
+  --docx-lt1-color: #FFFFFF;
+  --docx-dk2-color: #1F497D;
+  --docx-lt2-color: #EEECE1;
+  --docx-accent1-color: #4F81BD;
+  --docx-accent2-color: #C0504D;
+  --docx-accent3-color: #9BBB59;
+  --docx-accent4-color: #8064A2;
+  --docx-accent5-color: #4BACC6;
+  --docx-accent6-color: #F79646;
+  --docx-hlink-color: #0000FF;
+  --docx-folHlink-color: #800080;
+}
+</style><!--docxjs document styles--><style>.docx span {
+  font-family: Arial;
+  min-height: 11.00pt;
+  font-size: 11.00pt;
+}
+.docx p {
+  line-height: 1.15;
+}
+p.docx_heading1 {
+  margin-top: 20.00pt;
+  margin-bottom: 6.00pt;
+}
+p.docx_heading1 span {
+  min-height: 20.00pt;
+  font-size: 20.00pt;
+}
+p.docx_heading2 {
+  margin-top: 18.00pt;
+  margin-bottom: 6.00pt;
+}
+p.docx_heading2 span {
+  font-weight: normal;
+  min-height: 16.00pt;
+  font-size: 16.00pt;
+}
+p.docx_heading3 {
+  margin-top: 16.00pt;
+  margin-bottom: 4.00pt;
+}
+p.docx_heading3 span {
+  font-weight: normal;
+  color: #434343;
+  min-height: 14.00pt;
+  font-size: 14.00pt;
+}
+p.docx_heading4 {
+  margin-top: 14.00pt;
+  margin-bottom: 4.00pt;
+}
+p.docx_heading4 span {
+  color: #666666;
+  min-height: 12.00pt;
+  font-size: 12.00pt;
+}
+p.docx_heading5 {
+  margin-top: 12.00pt;
+  margin-bottom: 4.00pt;
+}
+p.docx_heading5 span {
+  color: #666666;
+  min-height: 11.00pt;
+  font-size: 11.00pt;
+}
+p.docx_heading6 {
+  margin-top: 12.00pt;
+  margin-bottom: 4.00pt;
+}
+p.docx_heading6 span {
+  font-style: italic;
+  color: #666666;
+  min-height: 11.00pt;
+  font-size: 11.00pt;
+}
+p.docx_title {
+  margin-top: 0.00pt;
+  margin-bottom: 3.00pt;
+}
+p.docx_title span {
+  min-height: 26.00pt;
+  font-size: 26.00pt;
+}
+p.docx_subtitle {
+  margin-top: 0.00pt;
+  margin-bottom: 16.00pt;
+}
+p.docx_subtitle span {
+  font-family: Arial;
+  font-style: normal;
+  color: #666666;
+  min-height: 15.00pt;
+  font-size: 15.00pt;
+}
+</style><!--docxjs document numbering styles--><style>p.docx-num-1-0:before {
+  content: "●\9";
+  counter-increment: docx-num-1-0;
+  text-decoration: none;
+}
+p.docx-num-1-0 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 36.00pt;
+}
+p.docx-num-1-0 {
+  counter-reset: docx-num-1-1 0;
+}
+p.docx-num-1-1:before {
+  content: "○\9";
+  counter-increment: docx-num-1-1;
+  text-decoration: none;
+}
+p.docx-num-1-1 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 72.00pt;
+}
+p.docx-num-1-1 {
+  counter-reset: docx-num-1-2 0;
+}
+p.docx-num-1-2:before {
+  content: "■\9";
+  counter-increment: docx-num-1-2;
+  text-decoration: none;
+}
+p.docx-num-1-2 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 108.00pt;
+}
+p.docx-num-1-2 {
+  counter-reset: docx-num-1-3 0;
+}
+p.docx-num-1-3:before {
+  content: "●\9";
+  counter-increment: docx-num-1-3;
+  text-decoration: none;
+}
+p.docx-num-1-3 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 144.00pt;
+}
+p.docx-num-1-3 {
+  counter-reset: docx-num-1-4 0;
+}
+p.docx-num-1-4:before {
+  content: "○\9";
+  counter-increment: docx-num-1-4;
+  text-decoration: none;
+}
+p.docx-num-1-4 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 180.00pt;
+}
+p.docx-num-1-4 {
+  counter-reset: docx-num-1-5 0;
+}
+p.docx-num-1-5:before {
+  content: "■\9";
+  counter-increment: docx-num-1-5;
+  text-decoration: none;
+}
+p.docx-num-1-5 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 216.00pt;
+}
+p.docx-num-1-5 {
+  counter-reset: docx-num-1-6 0;
+}
+p.docx-num-1-6:before {
+  content: "●\9";
+  counter-increment: docx-num-1-6;
+  text-decoration: none;
+}
+p.docx-num-1-6 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 252.00pt;
+}
+p.docx-num-1-6 {
+  counter-reset: docx-num-1-7 0;
+}
+p.docx-num-1-7:before {
+  content: "○\9";
+  counter-increment: docx-num-1-7;
+  text-decoration: none;
+}
+p.docx-num-1-7 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 288.00pt;
+}
+p.docx-num-1-7 {
+  counter-reset: docx-num-1-8 0;
+}
+p.docx-num-1-8:before {
+  content: "■\9";
+  counter-increment: docx-num-1-8;
+  text-decoration: none;
+}
+p.docx-num-1-8 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;
+  text-indent: -18.00pt;
+  margin-left: 324.00pt;
+}
+.docx-wrapper {
+  counter-reset: docx-num-1-0 0 docx-num-1-1 0 docx-num-1-2 0 docx-num-1-3 0 docx-num-1-4 0 docx-num-1-5 0 docx-num-1-6 0 docx-num-1-7 0 docx-num-1-8 0;
+}
+</style><div class="docx-wrapper"><section class="docx" style="padding: 72pt; width: 595.45pt; min-height: 841.7pt;"><article><p class="docx_heading1" style="margin-top: 12pt; margin-bottom: 12pt; text-align: center;"><span id="_b9vrgs1i1dnr"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Введение</span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_11kov4a53wrm"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Инструкции для заполнения анкеты</span></a><a href="#_11kov4a53wrm"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_uiegycu5iaum"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Общие предпочтения</span></a><a href="#_uiegycu5iaum"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_r6mx0n97t9hk"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">1. Каковы основные цели сайта? (Информация о компании, продажи, консультации, поддержка клиентов и т.д.)<span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_faokze3hscqc"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">2. Какие ключевые функции вы хотите видеть на сайте? (Интернет-магазин, каталог продукции, форма обратной связи, поддержка клиентов, блоги и новости и т.д.)<span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_7ug2rjd5qz24"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">3. Кто является вашей целевой аудиторией? (Медицинские учреждения, частные клиники, лаборатории, пациенты и т.д.)<span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_jtngu2nu44m1"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">4. Какие сайты вам нравятся по дизайну? Можете указать примеры?<span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_b7q665mg0ois"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">5. Какой стиль дизайна вам ближе? (Минимализм, яркий и динамичный, классический, технологичный и т.д.)<span> </span>2</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_hgjusyitoyqe"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">6. Хотите ли вы, чтобы дизайн был более строгим и профессиональным или более креативным и современным?<span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_5ap0mvov6bhp"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Цветовая палитра</span></a><a href="#_5ap0mvov6bhp"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_snzg5s2n3nem"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">1. Есть ли у вас предпочтения по цветовой гамме? (Если есть брендовые цвета, стоит ли их использовать?)<span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_1wsy7pq5nqk1"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">2. Есть ли цвета, которых вы хотите избежать?<span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_568qfsuasf41"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Шрифты и типографика</span></a><a href="#_568qfsuasf41"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_b5j1yhro41rf"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">1. Есть ли предпочтения по шрифтам? (Классический, современный, с засечками, без засечек и т.д.)<span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_ed9533rlwuat"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">2. Какие шрифты должны быть для заголовков, а какие для текста?<span> </span>3</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_55f9inc6fcam"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Контент и функциональность</span></a><a href="#_55f9inc6fcam"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_98rm0u7cfh0t"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">1. Какие разделы должны быть на сайте? (О компании, Продукция, Услуги, Контакты, Блог, Часто задаваемые вопросы и т.д.)<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_48um8wb0fgt6"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">2. Какие виды продукции нужно показать на сайте? Нужно ли разделение по категориям?<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_94fw8v8s5w1"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">3. Требуется ли наличие функции поиска по продукции?<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1;"><a href="#_bhccavpn4lxr"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">Интерфейс и удобство использования</span></a><a href="#_bhccavpn4lxr"><span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;"><span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_3nutzzkno0xu"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">1. Насколько важна адаптивность сайта? (Для мобильных устройств, планшетов и т.д.)<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_q1gw0agth5q5"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">2. Нужна ли возможность для пользователей оставлять отзывы о продукции?<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_kwd89cnudv2x"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">3. Требуется ли поддержка мультиязычности?<span> </span>4</span></a><span></span></p><p style="margin-top: 3pt; line-height: 1; text-indent: 0pt; margin-left: 18pt;"><a href="#_xi7k86540rty"><span style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; font-variant: none; text-decoration: none; color: rgb(0, 0, 0); min-height: 14pt; font-size: 14pt; background-color: inherit;">4. Необходимо ли в рамках сайта предусмотреть возможность для администрирования контента?<span> </span>5</span></a><span></span></p><p class="docx_heading1" style="margin-top: 12pt; margin-bottom: 12pt;"><span id="_11kov4a53wrm"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Инструкции для заполнения анкеты:</span></p><p style="margin-top: 12pt; margin-bottom: 12pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Пожалуйста, ответьте на вопросы, которые максимально соответствуют вашим требованиям. Если какой-то вопрос вам не ясен или вы не уверены, какой вариант выбрать, оставьте его пустым или отметьте, что решение оставляется на усмотрение нашей команды. Мы учтем ваши предпочтения в процессе разработки.</span></p><p style="margin-top: 12pt; margin-bottom: 12pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Если в каком-либо вопросе у вас нет четкого предпочтения, вы можете указать, что это не является приоритетом, и мы предложим оптимальные решения, исходя из лучших практик и специфики вашего бизнеса.</span></p><p class="docx_heading1"><span id="_uiegycu5iaum"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Общие предпочтения</span></p><p class="docx_heading2"><span id="_r6mx0n97t9hk"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1. </span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Каковы основные цели сайта? (Информация о компании, продажи, консультации, поддержка клиентов и т.д.)</span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span></p><p class="docx_heading2"><span id="_faokze3hscqc"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Какие ключевые функции вы хотите видеть на сайте? (Интернет-магазин, каталог продукции, форма обратной связи, поддержка клиентов, блоги и новости и т.д.)</span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading2"><span id="_7ug2rjd5qz24"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">3. Кто является вашей целевой аудиторией? (Медицинские учреждения, частные клиники, лаборатории, пациенты и т.д.)</span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading2"><span id="_jtngu2nu44m1"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">4. Какие сайты вам нравятся по дизайну? Можете указать примеры?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span></p><p><span></span></p><p class="docx_heading2"><span id="_b7q665mg0ois"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">5. Какой стиль дизайна вам ближе? (Минимализм, яркий и динамичный, классический, технологичный и т.д.)</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading2"><span id="_hgjusyitoyqe"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">6. Хотите ли вы, чтобы дизайн был более строгим и профессиональным или более креативным и современным?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading1"><span id="_5ap0mvov6bhp"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Цветовая палитра</span></p><p><span></span></p><p class="docx_heading2"><span id="_snzg5s2n3nem"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1. Есть ли у вас предпочтения по цветовой гамме? (Если есть брендовые цвета, стоит ли их использовать?)</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span></p><p><span></span></p><p class="docx_heading2"><span id="_1wsy7pq5nqk1"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Есть ли цвета, которых вы хотите избежать?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading1"><span id="_568qfsuasf41"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Шрифты и типографика</span></p><p class="docx_heading2"><span id="_b5j1yhro41rf"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1. </span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Есть ли предпочтения по шрифтам? (Классический, современный, с засечками, без засечек и т.д.)</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading2"><span id="_ed9533rlwuat"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Какие шрифты должны быть для заголовков, а какие для текста?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading1"><span id="_55f9inc6fcam"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Контент и функциональность</span></p><p class="docx_heading2"><span id="_98rm0u7cfh0t"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1. </span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Какие разделы должны быть на сайте? (О компании, Продукция, Услуги, Контакты, Блог, Часто задаваемые вопросы и т.д.)</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading2"><span id="_48um8wb0fgt6"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Какие виды продукции нужно показать на сайте? Нужно ли разделение по категориям?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading2"><span id="_94fw8v8s5w1"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">3. Требуется ли наличие функции поиска по продукции?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading1"><span id="_bhccavpn4lxr"></span><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Интерфейс и удобство использования</span></p><p><span></span></p><p class="docx_heading2"><span id="_3nutzzkno0xu"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1. Насколько важна адаптивность сайта? (Для мобильных устройств, планшетов и т.д.)</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p><span></span></p><p class="docx_heading2"><span id="_q1gw0agth5q5"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Нужна ли возможность для пользователей оставлять отзывы о продукции?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p><p class="docx_heading2"><span id="_kwd89cnudv2x"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">3. Требуется ли поддержка мультиязычности?</span></p><p><span></span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span></p><p><span></span></p><p class="docx_heading2" style="margin-top: 12pt; margin-bottom: 12pt;"><span id="_xi7k86540rty"></span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">4. Необходимо ли в рамках сайта предусмотреть возможность для администрирования контента?</span></p><p class="docx-num-1-0" style="margin-top: 12pt; margin-bottom: 0pt; text-indent: -18pt; margin-left: 36pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Добавление новых постов.</span></p><p class="docx-num-1-0" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: -18pt; margin-left: 36pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Редактирование существующих материалов.</span></p><p class="docx-num-1-0" style="margin-top: 0pt; margin-bottom: 0pt; text-indent: -18pt; margin-left: 36pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Удаление контента.</span></p><p class="docx-num-1-0" style="margin-top: 0pt; margin-bottom: 12pt; text-indent: -18pt; margin-left: 36pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Другие функции администрирования (уточните, если есть).</span></p><p><span style="font-family: &quot;Times New Roman&quot;; color: rgb(255, 0, 0); min-height: 14pt; font-size: 14pt;">Напишите ответ здесь…</span><span></span></p></article></section></div>

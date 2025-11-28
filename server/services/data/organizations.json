@@ -121,5 +121,27 @@
     "bz": "63582",
     "details": "123",
     "status": "Активный"
+  },
+  {
+    "files": [
+      "uploads\\organizations\\183b9d28-3b18-4ccf-933a-8dd40c49ead8\\1739179037540.docx"
+    ],
+    "id": "14",
+    "tax": "123456789",
+    "identificator": "2222",
+    "name": "222",
+    "docNo": "sda",
+    "dateDoc": "2025-01-31T19:00:00.000Z",
+    "address": "w",
+    "terCode": "",
+    "unitAccountingTer": "101-шаҳри Душанбе",
+    "grbsResonsible": "",
+    "grbs": "109-109-Вазорати мудофиаи Ҷумҳурии Тоҷикистон",
+    "pbs": "",
+    "categoryBudget": "",
+    "orgType": "Бюджетная организация",
+    "bz": "63582",
+    "details": "123",
+    "status": "Активный"
   }
 ]
